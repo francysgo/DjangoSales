@@ -46,9 +46,11 @@ ROOT_URLCONF = 'DjangoSales.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'apps/users/templates'),
-        os.path.join(BASE_DIR, 'apps/administrador/templates'),
-        os.path.join(BASE_DIR, 'apps/home/templates')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates/users'),
+            os.path.join(BASE_DIR, 'templates/administrador'),
+            os.path.join(BASE_DIR, 'templates/home')
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,12 +71,8 @@ WSGI_APPLICATION = 'DjangoSales.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ventas_db',
-        'USER': 'ventas',
-        'PASSWORD': 'ventas_root',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
     }
 }
 
@@ -117,7 +115,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'apps/users/static'),
-    os.path.join(BASE_DIR, 'apps/home/static'),
-    os.path.join(BASE_DIR, 'apps/administrador/static'),
+    os.path.join(BASE_DIR, 'static'),
     )
