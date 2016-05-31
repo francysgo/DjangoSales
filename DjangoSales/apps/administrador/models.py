@@ -39,6 +39,7 @@ class Entradas(models.Model):
 	producto = models.CharField(max_length=50)
 	proveedor = models.ForeignKey(Proveedor)
 	cantidad = models.FloatField(default=0)
+	categoria = models.ForeignKey(CatalogoCategoria,default=0)
 	unidad = models.CharField(max_length=50,choices=unidades)
 	precio_entrada = models.FloatField(default=0)
 	precio_salida = models.FloatField(default=0)
@@ -76,16 +77,15 @@ class Venta(models.Model):
 		verbose_name = "Venta"
 		verbose_name_plural = "Ventas"
 
-
 	def __str__(self):
-        return '%s'%self.usuario
+		return '%s'%self.usuario
 
 class DescripcionVenta(models.Model):
 
 	venta = models.ForeignKey(Venta)
 	producto = models.CharField(max_length=50)
 	cantidad = models.FloatField(default=0)
-	precio_unitario models.FloatField(default=0)
+	precio_unitario = models.FloatField(default=0)
 
 
 	class Meta:

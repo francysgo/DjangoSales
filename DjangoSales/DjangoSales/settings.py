@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'apps.users',
     'apps.home',
     'apps.administrador',
+    'rest_framework',
 ]
 
 MIDDLEWARE_CLASSES = [
