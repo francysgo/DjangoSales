@@ -7,13 +7,22 @@ from rest_framework.response import Response
 class CategoriaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = CatalogoCategoria
-        fields = ('id','nombre_categoria')
+        fields = ('id','nombre')
+
+class CategoriarViewSet(viewsets.ModelViewSet):
+	
+	queryset = CatalogoCategoria.objects.all()
+	serializer_class = CategoriaSerializer
 
 class ProveedorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Proveedor
-        fields = ('id','nombre_proveedor')
+        fields = ('id','nombre')
 
+class ProveedorViewSet(viewsets.ModelViewSet):
+
+	queryset = Proveedor.objects.all()
+	serializer_class = ProveedorSerializer
 
 # Serializers define the API representation.
 class EntradasSerializer(serializers.HyperlinkedModelSerializer):
