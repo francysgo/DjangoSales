@@ -32,7 +32,7 @@ class EntradasSerializer(serializers.HyperlinkedModelSerializer):
 
 	class Meta:
 		model = Entradas
-		fields = ('id','proveedor', 'producto', 'cantidad', 'categoria', 'unidad','precio_entrada', 'precio_salida')
+		fields = ('id','proveedor', 'producto', 'cantidad', 'categoria', 'unidad','precio_entrada', 'precio_salida', 'fecha')
 
 # ViewSets define the view behavior.
 class EntradasViewSet(viewsets.ModelViewSet):

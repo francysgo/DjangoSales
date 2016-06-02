@@ -1,49 +1,51 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% block titulo %}Entradas{% endblock titulo %}
 {% block entradas %}class="active"{% endblock entradas %}
 {% block contenido %}
-<div class="col-md-12">
-    <div class="card card-plain">
-        <div class="header">
-            <h4 class="title">Tabla de entradas</h4>
-            <p class="category">Aquí se muestran todas las entradas</p>
-        </div>
-        <div class="content table-responsive table-full-width">
-            <table class="table table-hover" id="example">
-                <thead>
-	                <tr>
-	                    <th>ID</th>
-	                	<th>PROVEEDOR</th>
-	                	<th>PRODUCTO</th>
-	                	<th>CANTIDAD</th>
-	                	<th>TIPO</th>
-	                	<th>PRECIO</th>
-	                	<th>FECHA</th>
-	                	<th class="text-center">ACCIONES</th>
-                	</tr>
-                </thead>
-                <tbody>
-                    {% for x in entradas %}
-                    	<tr>
-                    		<td>{{ x.id }}</td>
-                    		<td>{{ x.proveedor.nombre }}</td>
-                    		<td>{{ x.producto }}</td>
-                    		<td>{{ x.cantidad }}</td>
-                    		<td>{{ x.tipo }}</td>
-                    		<td>{{ x.precio }}</td>
-                    		<td>{{ x.fecha }}</td>
-                    		<td class="text-center">
-                    			<a href="#fakelink" style="font-size:22px; color:#f0ad4e;"><i class="fa fa-edit"></i></a>
-                    			<a href="#eliminar" style="font-size:22px; color:#d9534f; padding-left:10px;" data-toggle="modal" data-target="#eliminar"><i class="fa fa-trash"></i></a>
-                    		</td>
-                    	</tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+<div class="container" ng-controller='entradasController' style="padding-top:60px;">
+    <div class="col-md-12">
+        <div class="card card-plain">
+            <div class="header">
+                <h4 class="title">Tabla de entradas</h4>
+                <p class="category">Aquí se muestran todas las entradas</p>
+            </div>
+            <div class="content table-responsive table-full-width">
+                <table class="table table-hover" id="example">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>PROVEEDOR</th>
+                            <th>PRODUCTO</th>
+                            <th>CANTIDAD</th>
+                            <th>UNIDAD</th>
+                            <th>PRECIO</th>
+                            <th>FECHA</th>
+                            <th class="text-center">ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in entradas">
+                            <td>[[ x.id ]]</td>
+                            <td>[[ x.proveedor ]]</td>
+                            <td>[[ x.producto ]]</td>
+                            <td>[[ x.cantidad ]]</td>
+                            <td>[[ x.unidad ]]</td>
+                            <td>[[ x.precio_entrada ]]</td>
+                            <td>[[ x.fecha ]]</td>
+                            <td class="text-center">
+                                <a href="#fakelink" style="font-size:22px; color:#f0ad4e;"><i class="fa fa-edit"></i></a>
+                                <a href="#eliminar" style="font-size:22px; color:#d9534f; padding-left:10px;" data-toggle="modal" data-target="#eliminar"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
+            </div>
         </div>
     </div>
 </div>
+
 
 <div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
   <div class="modal-dialog">
@@ -72,44 +74,5 @@
 
 {% endblock contenido %}
 {% block js %}
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs/jszip-2.5.0,pdfmake-0.1.18,dt-1.10.9,b-1.0.3,b-colvis-1.0.3,b-flash-1.0.3,b-html5-1.0.3,b-print-1.0.3/datatables.min.css"/>
- 
-<script type="text/javascript" src="https://cdn.datatables.net/r/bs/jszip-2.5.0,pdfmake-0.1.18,dt-1.10.9,b-1.0.3,b-colvis-1.0.3,b-flash-1.0.3,b-html5-1.0.3,b-print-1.0.3/datatables.min.js"></script>
-
-
-	<script type="text/javascript">
-      $('#example').DataTable( {
-            buttons: [
-                'copy', 'excel', 'pdf', 'print'
-            ],
-            dom: 'lfBrtip',
-            "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todo"]],
-            language: 
-            {
-            "sProcessing": "Procesando...",
-            "sLengthMenu": "Mostrar _MENU_ registros",
-            "sZeroRecords": "No se encontraron resultados",
-            "sEmptyTable": "Ningún dato disponible en esta tabla",
-            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-            "sInfoPostFix": "",
-            "sSearch": "Buscar:",
-            "sUrl": "",
-            "sInfoThousands": ",",
-            "sLoadingRecords": "Cargando...",
-            "oPaginate": {
-              "sFirst": "Primero",
-              "sLast": "Último",
-              "sNext": "Siguiente",
-              "sPrevious": "Anterior"
-              },
-            },
-        } );;
-
-        function Eliminar(id,nombre){
-            $('#modal_idEntrada').val(id);
-            $('#modal_name').text(nombre);
-        }
-    </script>
+    <script type="text/javascript" src="{% static "js/app.js" %}"></script>
 {% endblock js %}
