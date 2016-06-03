@@ -6,6 +6,7 @@ var SalesApp = angular.module('SalesApp', []);
 	  });
 
 
+
 SalesApp.controller('entradasController', function($scope, $http) {
 	
 	$http.get('/api/entradas.json')
@@ -15,4 +16,6 @@ SalesApp.controller('entradasController', function($scope, $http) {
         .error(function(data) {
             console.log('Error: ' + data);
         });
+
+
 });

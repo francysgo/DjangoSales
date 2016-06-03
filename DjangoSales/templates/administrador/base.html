@@ -1,208 +1,255 @@
 {% load staticfiles %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<!--================================================================================
-  Item Name: Materialize - Material Design Admin Template
-  Version: 2.1
-  Author: GeeksLabs
-  Author URL: http://www.themeforest.net/user/geekslabs
-================================================================================ -->
-
-
-<!-- Mirrored from demo.geekslabs.com/materialize/v2.1/layout03/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 02 Aug 2015 16:03:55 GMT -->
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="msapplication-tap-highlight" content="no">
-    <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google. ">
-    <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template,">
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static "img/apple-icon.png" %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static "img/favicon.png" %}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
     <title>{% block titulo %}{% endblock titulo %}</title>
 
-    <!-- Favicons-->
-    <link rel="icon" href="images/favicon/favicon-32x32.png" sizes="32x32">
-    <!-- Favicons-->
-    <link rel="apple-touch-icon-precomposed" href="{% static "images/favicon/apple-touch-icon-152x152.png" %}">
-    <!-- For iPhone -->
-    <meta name="msapplication-TileColor" content="#00bcd4">
-    <meta name="msapplication-TileImage" content="{% static "images/favicon/mstile-144x144.png" %}">
-    <!-- For Windows Phone -->
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
 
 
-    <!-- CORE CSS-->    
-    <link href="{% static "css/materialize.css" %}" type="text/css" rel="stylesheet" media="screen,projection">
-    <link href="{% static "css/style.css" %}" type="text/css" rel="stylesheet" media="screen,projection">
-    <!-- Custome CSS-->    
-    <link href="{% static "css/custom-style.css" %}" type="text/css" rel="stylesheet" media="screen,projection">    
-    <!-- CSS style Horizontal Nav (Layout 03)-->    
-    <link href="{% static "css/style-horizontal.css" %}" type="text/css" rel="stylesheet" media="screen,projection">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    
+    <!-- Bootstrap core CSS     -->
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet" />
+
+    <!-- Animation library for notifications   -->
+    <link href="{% static "css/animate.min.css" %}" rel="stylesheet"/>
+
+    <!--  Paper Dashboard core CSS    -->
+    <link href="{% static "css/paper-dashboard.css" %}" rel="stylesheet"/>
 
 
-    <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
-    <link href="{% static "js/plugins/perfect-scrollbar/perfect-scrollbar.css" %}" type="text/css" rel="stylesheet" media="screen,projection">
-    <link href="{% static "js/plugins/jvectormap/jquery-jvectormap.css" %}" type="text/css" rel="stylesheet" media="screen,projection">
-    <link href="{% static "js/plugins/chartist-js/chartist.min.css" %}" type="text/css" rel="stylesheet" media="screen,projection">
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="{% static "css/demo.css" %}" rel="stylesheet" />
 
+
+    <!--  Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+    <link href="{% static "css/themify-icons.css" %}" rel="stylesheet">
 
 </head>
+<body>
 
-<body ng-app="SalesApp">
-    <!-- Start Page Loading -->
-    <div id="loader-wrapper">
-        <div id="loader"></div>        
-        <div class="loader-section section-left"></div>
-        <div class="loader-section section-right"></div>
+<div class="wrapper">
+    <div class="sidebar" data-background-color="white" data-active-color="danger">
+
+    <!--
+        Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
+        Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
+    -->
+
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="http://www.creative-tim.com" class="simple-text">
+                    Creative Tim
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li class="active">
+                    <a href="dashboard.html">
+                        <i class="ti-panel"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="user.html">
+                        <i class="ti-user"></i>
+                        <p>User Profile</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="table.html">
+                        <i class="ti-view-list-alt"></i>
+                        <p>Table List</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="typography.html">
+                        <i class="ti-text"></i>
+                        <p>Typography</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="icons.html">
+                        <i class="ti-pencil-alt2"></i>
+                        <p>Icons</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="maps.html">
+                        <i class="ti-map"></i>
+                        <p>Maps</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="notifications.html">
+                        <i class="ti-bell"></i>
+                        <p>Notifications</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
-    <!-- End Page Loading -->
 
-    <!-- //////////////////////////////////////////////////////////////////////////// -->
-
-    <!-- START HEADER -->
-    <header id="header" class="page-topbar">
-        <!-- start header nav-->
-        <div class="navbar-fixed">
-            <nav class="cyan">
-                <div class="nav-wrapper">                    
-                    
-                    <ul class="left">
-                      <li class="no-hover"><a href="#" data-activates="slide-out" class="menu-sidebar-collapse btn-floating btn-flat btn-medium waves-effect waves-light cyan hide-on-large-only"><i class="mdi-navigation-menu" ></i></a></li>
-                      <li><h1 class="logo-wrapper"><a href="index.html" class="brand-logo darken-1"><img src="{% static "images/materialize-logo.png" %}" alt="materialize logo"></a> <span class="logo-text">Materialize</span></h1></li>
-                    </ul>
-                    <ul class="right hide-on-med-and-down">                        
-                        <li><a href="javascript:void(0);" class="waves-effect waves-block waves-light toggle-fullscreen"><i class="mdi-action-settings-overscan"></i></a>
-                        </li>                      
-                        <li><a href="#" data-activates="username" class="dropdown-menu waves-effect waves-block waves-light chat-collapse">{{ user.username }}<i class="mdi-navigation-arrow-drop-down right"></i></a>
+    <div class="main-panel">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar bar1"></span>
+                        <span class="icon-bar bar2"></span>
+                        <span class="icon-bar bar3"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Dashboard</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="ti-panel"></i>
+                                <p>Stats</p>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="ti-bell"></i>
+                                    <p class="notification">5</p>
+                                    <p>Notifications</p>
+                                    <b class="caret"></b>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">Notification 1</a></li>
+                                <li><a href="#">Notification 2</a></li>
+                                <li><a href="#">Notification 3</a></li>
+                                <li><a href="#">Notification 4</a></li>
+                                <li><a href="#">Another notification</a></li>
+                              </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="ti-settings"></i>
+                                <p>Settings</p>
+                            </a>
                         </li>
                     </ul>
+
                 </div>
-            </nav>
-
-            <!-- HORIZONTL NAV START-->
-             <nav id="horizontal-nav" class="white hide-on-med-and-down">
-                <div class="nav-wrapper">                  
-                  <ul id="nav-mobile" class="left hide-on-med-and-down">
-                    <li>
-                        <a href="index.html" class="cyan-text">
-                            <i class="mdi-action-dashboard"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="app-email.html" class="cyan-text">
-                            <i class="mdi-communication-email"></i>
-                            <span>Entradas</span>
-                        </a>
-                    </li>                    
-                    <li>
-                        <a href="app-email.html" class="cyan-text">
-                            <i class="mdi-communication-email"></i>
-                            <span>Inventario</span>
-                        </a>
-                    </li> 
-                    <li>
-                        <a href="app-email.html" class="cyan-text">
-                            <i class="mdi-communication-email"></i>
-                            <span>Ventas</span>
-                        </a>
-                    </li> 
-                    <li>
-                        <a class="dropdown-menu cyan-text" href="#!" data-activates="Tablesdropdown">
-                            <i class="mdi-editor-border-all"></i>
-                            <span>Tables<i class="mdi-navigation-arrow-drop-down right"></i></span>
-                        </a>
-                    </li>
-                  </ul>
-                </div>
-              </nav>
-                <!-- username -->
-                <ul id="username" class="dropdown-content dropdown-horizontal-list">
-                  <li><a href="css-typography.html" class="cyan-text">Configuraciones</a></li>
-                  <li><a href="css-icons.html" class="cyan-text">Salir</a></li>                  
-                </ul>
+            </div>
+        </nav>
 
 
-                <!-- Tablesdropdown -->
-                <ul id="Tablesdropdown" class="dropdown-content dropdown-horizontal-list">
-                  <li><a href="table-basic.html" class="cyan-text">Basic Tables</a></li>
-                  <li><a href="table-data.html" class="cyan-text">Data Tables</a></li>
-                </ul>
-        </div>
-        <!-- end header nav-->
-    </header>
-    <!-- END HEADER -->
-
-    <!-- //////////////////////////////////////////////////////////////////////////// -->
-
-    <!-- START MAIN -->
-    <div id="main">
-        <!-- START WRAPPER -->
-        <div class="wrapper">
-        {% block contenido %}
-        {% endblock %}
-
-        </div>
-        <!-- END WRAPPER -->
-
-    </div>
-    <!-- END MAIN -->
-
-
-
-    <!-- //////////////////////////////////////////////////////////////////////////// -->
-
-    <!-- START FOOTER -->
-    <footer class="page-footer">
-        <div class="footer-copyright">
-            <div class="container">
-                Copyright © 2015 <a class="grey-text text-lighten-4" href="http://themeforest.net/user/geekslabs/portfolio?ref=geekslabs" target="_blank">GeeksLabs</a> All rights reserved.
-                <span class="right"> Design and Developed by <a class="grey-text text-lighten-4" href="http://geekslabs.com/">GeeksLabs</a></span>
+        <div class="content">
+            <div class="container-fluid">
+                {% block contenido %}
+                    
+                {% endblock contenido %}
             </div>
         </div>
-    </footer>
-    <!-- END FOOTER -->
 
 
-    <!-- ================================================
-    Scripts
-    ================================================ -->
-    
-    <!-- jQuery Library -->
-    <script type="text/javascript" src="{% static "js/jquery-1.11.2.min.js" %}"></script>    
-    <!--materialize js-->
-    <script type="text/javascript" src="{% static "js/materialize.js" %}"></script>
-    <!--scrollbar-->
-    <script type="text/javascript" src="{% static "js/plugins/perfect-scrollbar/perfect-scrollbar.min.js" %}"></script>
-    
+        <footer class="footer">
+            <div class="container-fluid">
+                <nav class="pull-left">
+                    <ul>
 
-    <!-- chartist -->
-    <script type="text/javascript" src="{% static "js/plugins/chartist-js/chartist.min.js" %}"></script>   
+                        <li>
+                            <a href="http://www.creative-tim.com">
+                                Creative Tim
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://blog.creative-tim.com">
+                               Blog
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.creative-tim.com/license">
+                                Licenses
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="copyright pull-right">
+                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>
+                </div>
+            </div>
+        </footer>
 
-    <!-- chartjs -->
-    <script type="text/javascript" src="{% static "js/plugins/chartjs/chart.min.js" %}"></script>
-    
+    </div>
+</div>
 
-    <!-- sparkline -->
-    <script type="text/javascript" src="{% static "js/plugins/sparkline/jquery.sparkline.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/plugins/sparkline/sparkline-script.js" %}"></script>
-    
-    <!-- google map api -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAZnaZBXLqNBRXjd-82km_NO7GUItyKek"></script>
+<div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">Eliminar</h4>
+      </div>
+      <div class="modal-body">
+        <p>¿Deseas eliminar el producto <strong></strong>?</p>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+            <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cancelar</button>
+        </div>
+        <div class="divider"></div>
+        <div class="right-side">
+            <form method="post">
+                <button type="submit" class="btn btn-danger btn-simple">Eliminar</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
 
-    <!--jvectormap-->
-    <script type="text/javascript" src="{% static "js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/plugins/jvectormap/vectormap-script.js" %}"></script>    
+    <!--   Core JS Files   -->
+    <script src="{% static "js/jquery-1.10.2.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/bootstrap.min.js" %}" type="text/javascript"></script>
 
-    
-    <!--plugins.js - Some Specific JS codes for Plugin Settings-->
-    <script type="text/javascript" src="{% static "js/plugins.js" %}"></script>
+    <!--  Checkbox, Radio & Switch Plugins -->
+    <script src="{% static "js/bootstrap-checkbox-radio.js" %}"></script>
+
+    <!--  Charts Plugin -->
+    <script src="{% static "js/chartist.min.js" %}"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="{% static "js/bootstrap-notify.js" %}"></script>
+
+    <!--  Google Maps Plugin    -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+
+    <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
+    <script src="{% static "js/paper-dashboard.js" %}"></script>
+
+    <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+    <script src="{% static "js/demo.js" %}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            demo.initChartist();
+
+            $.notify({
+                icon: 'ti-gift',
+                message: "Welcome to <b>Paper Dashboard</b> - a beautiful Bootstrap freebie for your next project."
+
+            },{
+                type: 'success',
+                timer: 4000
+            });
+
+        });
+    </script>
     {% block js %}
         
     {% endblock js %}
-
-</body>
-
 </html>
