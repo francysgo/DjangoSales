@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block titulo %}Entradas{% endblock titulo %}
+{% block entradas %}class="active"{% endblock entradas %}
+{% block contenido %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Striped Table</h4>
+                    <p class="category">Here is a subtitle for this table</p>
+                </div>
+                <div class="content table-responsive table-full-width">
+                    <table class="table table-striped" id="example">
+                        <thead>
+                            <th>ID</th>
+                            <th>PROVEEDOR</th>
+                            <th>PRODUCTO</th>
+                            <th>CANTIDAD</th>
+                            <th>UNIDAD</th>
+                            <th>PRECIO</th>
+                            <th>FECHA</th>
+                            <th class="text-center">ACCIONES</th>
+                        </tr></thead>
+                        <tbody>
+                            {% for x in entradas %}
+                            <tr>
+                                <td>{{ x.id }}</td>
+                                <td>{{ x.proveedor }}</td>
+                                <td>{{ x.producto }}</td>
+                                <td>{{ x.cantidad }}</td>
+                                <td>{{ x.unidad }}</td>
+                                <td>{{ x.precio_entrada }}</td>
+                                <td>{{ x.fecha }}</td>
+                                <td class="text-center">
+                                    <a href="#fakelink" style="font-size:22px; color:#f0ad4e;"><i class="fa fa-edit"></i></a>
+                                    <a href="#eliminar" style="font-size:22px; color:#d9534f; padding-left:10px;" data-toggle="modal" data-target="#eliminar"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+{% endblock contenido %}
+{% block js %}
+    <script type="text/javascript" src="{% static "js/app.js" %}"></script>
+
+
+<script type="text/javascript">
+    $('#example').dataTable();
+</script>
+{% endblock js %}
