@@ -1,11 +1,26 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
 from django.views.generic import TemplateView
-from django.db.models import Sum, Avg
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from .models import(
 	Proveedor,
 	Entradas,
 	Inventario
 	)
+
+class RedirectView(TemplateView):
+    
+
+    def get_context_data(self, **kwargs):
+        context = super(RedirectView, self).get_context_data(**kwargs)
+        return context
+ 
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.tipo == 'Administrador':
+            return HttpResponseRedirect('/administrador/')
+        else:
+            return HttpResponseRedirect('/ventas/')
 
 class IndexView(TemplateView):
     
