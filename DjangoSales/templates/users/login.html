@@ -118,9 +118,19 @@
 
 <div class="container" >
     <div class="col-md-6 col-md-offset-3">
+        {% if mensaje %}
+            <div class="row" style="padding-top:50px;">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="alert alert-danger">
+                        <button type="button" aria-hidden="true" class="close">×</button>
+                        <span><b> Error - </b> {{ mensaje }}"</span>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
         <div id="logbox"  >
             <form  method="post">
-            	{% csrf_token %}
+                {% csrf_token %}
                 <h1>¡Bienvenido!</h1>
                 <input name="username" type="text" placeholder="Usuario" required="required" class="input pass"/>
                 <input name="password" type="password" placeholder="Contraseña" required="required" class="input pass"/>
@@ -128,11 +138,10 @@
 
             </form>
         </div>
-    </div>  </div>
-      </ul>
     </div>
-  </div>
-</nav>
+      
+</div>
+
 
 
     <!-- js placed at the end of the document so the pages load faster -->
