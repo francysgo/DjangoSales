@@ -29,10 +29,9 @@ INSTALLED_APPS = [
     'apps.users',
     'apps.home',
     'apps.administrador',
-<<<<<<< HEAD
-=======
+    'djng', 
     'rest_framework',
->>>>>>> antonio/dev
+
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -52,16 +51,15 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-<<<<<<< HEAD
+
             os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'templates/administrador'),
-            os.path.join(BASE_DIR, 'templates/home')],
-=======
+            os.path.join(BASE_DIR, 'templates/home'),
             os.path.join(BASE_DIR, 'templates/users'),
             os.path.join(BASE_DIR, 'templates/administrador'),
             os.path.join(BASE_DIR, 'templates/home')
             ],
->>>>>>> antonio/dev
+
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

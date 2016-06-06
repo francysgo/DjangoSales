@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block titulo %}Proveedores{% endblock titulo %}
+{% block entradas %}class="active"{% endblock entradas %}
+{% block contenido %}
+
+<div class="container-fluid" ng-controller="proveedoresController">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                  <div class="col-md-5">
+                    <h4 class="title">Striped Table</h4>
+                    <p class="category">Here is a subtitle for this table</p>
+                  </div>
+                      <div class="col-md-5">
+
+                      </div>
+
+                    </div>
+                    
+                      <form  name="proveedor_form"  ng-submit="submit()>
+                         {{proveedor_form}}
+                         {{ form.non_field_errors }}
+                         <ul class="djng-form-errors" ng-hide="proveedor_form.correo.$pristine">
+  <li ng-show="proveedor_form.correo.$error.required" class="ng-hide">This field is required.</li>
+  <li ng-show="proveedor_form.correo.$error.email" class="">Enter a valid email address.</li>
+</ul>
+                        <button type="submit" class="btn btn-success" ">Agregar Proveedor</button>
+                     </form>
+
+
+
+
+
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+{% endblock contenido %}
+{% block js %}
+{% endblock js %}
