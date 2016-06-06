@@ -40,9 +40,6 @@
 
 <div class="wrapper">
     <div class="sidebar" data-background-color="white" data-active-color="danger">
-
-
-
         <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="http://www.creative-tim.com" class="simple-text">
@@ -167,38 +164,20 @@
                     </ul>
                 </nav>
                 <div class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Wiggle Labs</a>
+                    &copy; made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Wiggle Labs</a>
                 </div>
             </div>
         </footer>
-
     </div>
+
+    
+{% block modales %}
+    
+{% endblock modales %}
 </div>
 
-<div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title" id="myModalLabel">Eliminar</h4>
-      </div>
-      <div class="modal-body">
-        <p>¿Deseas eliminar el producto <strong></strong>?</p>
-      </div>
-      <div class="modal-footer">
-        <div class="left-side">
-            <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cancelar</button>
-        </div>
-        <div class="divider"></div>
-        <div class="right-side">
-            <form method="post">
-                <button type="submit" class="btn btn-danger btn-simple">Eliminar</button>
-            </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+
 </body>
 
     <!--   Core JS Files   -->

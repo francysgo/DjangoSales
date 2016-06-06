@@ -19,9 +19,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(users_urls)),
     url(r'^venta/', include(home_urls)),
-
-    url(r'^administrador/', include(admin_urls)),
-
     url(r'^', include(admin_urls)),
     url(r'^api/', include(router.urls)),
 

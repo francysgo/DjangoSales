@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from .models import CatalogoCategoria, Proveedor, Entradas
+from .models import CatalogoCategoria, Proveedor, Entradas, CatalogoUnidades
 from rest_framework import routers, serializers, viewsets
 from rest_framework.response import Response
 
@@ -27,40 +27,46 @@ class ProveedorViewSet(viewsets.ModelViewSet):
 # Serializers define the API representation.
 class EntradasSerializer(serializers.HyperlinkedModelSerializer):
 
-	categoria = serializers.PrimaryKeyRelatedField(source='categoria.nombre', queryset=CatalogoCategoria.objects.all())
-	proveedor = serializers.PrimaryKeyRelatedField(source='proveedor.nombre', queryset=Proveedor.objects.all())
+    categoria = serializers.PrimaryKeyRelatedField(source='categoria.nombre', queryset=CatalogoCategoria.objects.all())
+    unidad = serializers.PrimaryKeyRelatedField(source='unidad.nombre', queryset=CatalogoUnidades.objects.all())
+    proveedor = serializers.PrimaryKeyRelatedField(source='proveedor.nombre', queryset=Proveedor.objects.all())
 
-	class Meta:
-		model = Entradas
-		fields = ('id','proveedor', 'producto', 'cantidad', 'categoria', 'unidad','precio_entrada', 'precio_salida', 'fecha')
+    class Meta:
+        model = Entradas
+        fields = ('id','proveedor', 'producto', 'cantidad', 'categoria', 'unidad','precio_entrada', 'precio_salida', 'fecha')
 
 # ViewSets define the view behavior.
 class EntradasViewSet(viewsets.ModelViewSet):
+
     queryset = Entradas.objects.all()
     serializer_class = EntradasSerializer
 
+
     def create(self, validated_data):
-    	proveedor = Proveedor.objects.get(id=validated_data.POST["proveedor"])
-    	categoria = CatalogoCategoria.objects.get(id=validated_data.POST["categoria"])
-    	entrada = Entradas.objects.create(producto=validated_data.POST['producto'],
-    		cantidad=validated_data.POST['cantidad'],
-    		unidad=validated_data.POST['unidad'],
-    		categoria=categoria,
-    		proveedor=proveedor,
-    		precio_entrada = validated_data.POST['precio_entrada'],
-    		precio_salida = validated_data.POST['precio_salida'])
-    	return Response({'producto':entrada.producto})
+        proveedor = Proveedor.objects.get(id=validated_data.POST["proveedor"])
+        categoria = CatalogoCategoria.objects.get(id=validated_data.POST["categoria"])
+        unidad = CatalogoUnidades.objects.get(id=validated_data.POST["unidad"])
+        entrada = Entradas.objects.create(producto=validated_data.POST['producto'],
+            cantidad=validated_data.POST['cantidad'],
+            unidad=unidad,
+            categoria=categoria,
+            proveedor=proveedor,
+            precio_entrada = validated_data.POST['precio_entrada'],
+            precio_salida = validated_data.POST['precio_salida'])
+        return Response({'producto':entrada.producto})
 
     def update(self, validated_data, pk):
-    	updated_instance = Entradas.objects.get(pk=pk)
-    	proveedor = Proveedor.objects.get(id=validated_data.POST["proveedor"])
-    	categoria = CatalogoCategoria.objects.get(id=validated_data.POST["categoria"])
-    	updated_instance.producto=validated_data.POST['producto']
-    	updated_instance.cantidad=validated_data.POST['cantidad']
-    	updated_instance.unidad=validated_data.POST['unidad']
-    	updated_instance.categoria=categoria
-    	updated_instance.proveedor=proveedor
-    	updated_instance.precio_entrada = validated_data.POST['precio_entrada']
-    	updated_instance.precio_salida = validated_data.POST['precio_salida']
-    	updated_instance.save()
-    	return updated_instance
+
+        updated_instance = Entradas.objects.get(pk=pk)
+        proveedor = Proveedor.objects.get(id=validated_data.POST["proveedor"])
+        unidad = CatalogoUnidades.objects.get(id=validated_data.POST["unidad"])
+        categoria = CatalogoCategoria.objects.get(id=validated_data.POST["categoria"])
+        updated_instance.producto=validated_data.POST['producto']
+        updated_instance.cantidad=validated_data.POST['cantidad']
+        updated_instance.unidad=unidad
+        updated_instance.categoria=categoria
+        updated_instance.proveedor=proveedor
+        updated_instance.precio_entrada = validated_data.POST['precio_entrada']
+        updated_instance.precio_salida = validated_data.POST['precio_salida']
+        updated_instance.save()
+        return updated_instance

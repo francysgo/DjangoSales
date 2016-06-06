@@ -31,6 +31,7 @@ class IndexView(TemplateView):
         context = super(IndexView, self).get_context_data(**kwargs)
         return context
 
+
 class EntradasView(TemplateView):
 
     template_name = "entradas.html"

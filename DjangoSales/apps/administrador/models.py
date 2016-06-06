@@ -9,14 +9,14 @@ unidades = (
 	)
 
 class CatalogoUnidades(models.Model):
-	nombre= models.CharField(max_length=50)
+	nombre = models.CharField(max_length=50)
 
 	class Meta:
 		verbose_name = "CatalogoUnidad"
 		verbose_name_plural = "Catalogo Unidades"
 
 		def __str__(self):
-			return '%s'%self.nombre
+			return self.nombre
 
 class CatalogoCategoria(models.Model):
 

@@ -3,68 +3,72 @@
 {% block titulo %}Entradas{% endblock titulo %}
 {% block entradas %}class="active"{% endblock entradas %}
 {% block contenido %}
-<div class="container-fluid" ng-controller="entradasController"> 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="header">
-                  <div class="col-md-5">
-                    <h4 class="title">Striped Table</h4>
-                    <p class="category">Here is a subtitle for this table</p>
-                    <div>
-                      <div class="col-md-5">
-                        <button class="btn btn-success btn-xs" ng-click="AgregarEntrada()">Nueva entrada</button>
-                        <div>
-
-
-                </div>
-                <div class="content table-responsive table-full-width" >
-                    <table class="table table-striped" id="example">
-                        <thead>
-                            <th>ID</th>
-                            <th>PROVEEDOR</th>
-                            <th>PRODUCTO</th>
-                            <th>CANTIDAD</th>
-                            <th>UNIDAD</th>
-                            <th>PRECIO</th>
-                            <th>FECHA</th>
-                            <th class="text-center">ACCIONES</th>
-                        </tr></thead>
-                        <tbody>
-                            {% for x in entradas %}
-                            <tr>
-                                <td>{{ x.id }}</td>
-                                <td>{{ x.proveedor }}</td>
-                                <td>{{ x.producto }}</td>
-                                <td>{{ x.cantidad }}</td>
-                                <td>{{ x.unidad }}</td>
-                                <td>{{ x.precio_entrada }}</td>
-                                <td>{{ x.fecha }}</td>
-                                <td class="text-center">
-                                    <a href="#fakelink" style="font-size:22px; color:#f0ad4e;"><i class="fa fa-edit"></i></a>
-                                    <a href="#eliminar" style="font-size:22px; color:#d9534f; padding-left:10px;" data-toggle="modal" data-target="#eliminar"><i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-        </div>
-
+<div class="card" ng-controller="entradasController">
+    <div class="header">
+        <h4 class="title">Entradas</h4>
+        <p class="category">Aquí se muestran todas las entradas</p>
+    </div><br />
+    <p style="padding-left:10px;"><button class="btn btn-primary" data-toggle="modal" data-target="#eliminar">Nueva</button></p>
+    <div class="content table-responsive table-full-width">
+        <table class="table table-striped" id="example">
+            <thead>
+                <th>ID</th>
+                <th>PROVEEDOR</th>
+                <th>PRODUCTO</th>
+                <th>CANTIDAD</th>
+                <th>UNIDAD</th>
+                <th>PRECIO</th>
+                <th>FECHA</th>
+                <th class="text-center">ACCIONES</th>
+            </tr></thead>
+            <tbody>
+               {% for x in entradas %}
+                    <tr>
+                        <td>{{ x.id }}</td>
+                        <td>{{ x.proveedor }}</td>
+                        <td>{{ x.producto }}</td>
+                        <td>{{ x.cantidad }}</td>
+                        <td>{{ x.unidad }}</td>
+                        <td>{{ x.precio_entrada }}</td>
+                        <td>{{ x.fecha }}</td>
+                        <td class="text-center">
+                            <a href="#fakelink" style="font-size:22px; color:#f0ad4e;"><i class="fa fa-edit"></i></a>
+                            <a href="#" id="{{ x.id }}" style="font-size:22px; color:#d9534f; padding-left:10px;" producto="{{ x.producto }}"  ng-click="eliminar(this.id,this.getAttribute('data-name'))"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
-
-
-
-
 {% endblock contenido %}
+
+{% block modales %}
+    <div class="modal fade" id="eliminar_entrada" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title" id="myModalLabel">Eliminar</h4>
+          </div>
+          <div class="modal-body">
+            <p>¿Deseas eliminar el producto <strong></strong>?</p>
+          </div>
+          <div class="modal-footer">
+            <div class="divider"></div>
+            <p>
+                <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-danger btn-simple">Eliminar</button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock modales %}
 {% block js %}
-
-
-
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/u/bs/dt-1.10.12/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/u/bs/dt-1.10.12/datatables.min.js"></script>
 <script type="text/javascript">
-    //$('#example').dataTable();
+    $('#example').dataTable();
 </script>
 {% endblock js %}
