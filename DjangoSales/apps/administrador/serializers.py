@@ -10,14 +10,14 @@ class CategoriaSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id','nombre')
 
 class CategoriarViewSet(viewsets.ModelViewSet):
-	
+
 	queryset = CatalogoCategoria.objects.all()
 	serializer_class = CategoriaSerializer
 
 class ProveedorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Proveedor
-        fields = ('id','nombre')
+        fields = ('id','nombre','telefono','correo','direccion')
 
 class ProveedorViewSet(viewsets.ModelViewSet):
 
@@ -64,4 +64,3 @@ class EntradasViewSet(viewsets.ModelViewSet):
     	updated_instance.precio_salida = validated_data.POST['precio_salida']
     	updated_instance.save()
     	return updated_instance
-    	

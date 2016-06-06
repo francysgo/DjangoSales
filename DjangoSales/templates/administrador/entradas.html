@@ -3,15 +3,22 @@
 {% block titulo %}Entradas{% endblock titulo %}
 {% block entradas %}class="active"{% endblock entradas %}
 {% block contenido %}
-<div class="container-fluid">
+<div class="container-fluid" ng-controller="entradasController"> 
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="header">
+                  <div class="col-md-5">
                     <h4 class="title">Striped Table</h4>
                     <p class="category">Here is a subtitle for this table</p>
+                    <div>
+                      <div class="col-md-5">
+                        <button class="btn btn-success btn-xs" ng-click="AgregarEntrada()">Nueva entrada</button>
+                        <div>
+
+
                 </div>
-                <div class="content table-responsive table-full-width">
+                <div class="content table-responsive table-full-width" >
                     <table class="table table-striped" id="example">
                         <thead>
                             <th>ID</th>
@@ -54,10 +61,10 @@
 
 {% endblock contenido %}
 {% block js %}
-    <script type="text/javascript" src="{% static "js/app.js" %}"></script>
+
 
 
 <script type="text/javascript">
-    $('#example').dataTable();
+    //$('#example').dataTable();
 </script>
 {% endblock js %}

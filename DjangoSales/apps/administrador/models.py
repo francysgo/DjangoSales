@@ -8,6 +8,16 @@ unidades = (
 	("paquete","paquete"),
 	)
 
+class CatalogoUnidades(models.Model):
+	nombre= models.CharField(max_length=50)
+
+	class Meta:
+		verbose_name = "CatalogoUnidad"
+		verbose_name_plural = "Catalogo Unidades"
+
+		def __str__(self):
+			return '%s'%self.nombre
+
 class CatalogoCategoria(models.Model):
 
 	nombre = models.CharField(max_length=50)
@@ -18,7 +28,7 @@ class CatalogoCategoria(models.Model):
 
 	def __str__(self):
 		return '%s'%self.nombre
-    
+
 
 class Proveedor(models.Model):
 
@@ -40,7 +50,7 @@ class Entradas(models.Model):
 	proveedor = models.ForeignKey(Proveedor)
 	cantidad = models.FloatField(default=0)
 	categoria = models.ForeignKey(CatalogoCategoria,default=0)
-	unidad = models.CharField(max_length=50,choices=unidades)
+	unidad = models.ForeignKey(CatalogoUnidades,default=0)
 	precio_entrada = models.FloatField(default=0)
 	precio_salida = models.FloatField(default=0)
 	fecha = models.DateField(auto_now_add=True)
@@ -95,5 +105,3 @@ class DescripcionVenta(models.Model):
 
 	def __str__(self):
 		pass
-    
-    

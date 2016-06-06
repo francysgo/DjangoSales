@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from .forms import ProveedorForm
 from .models import(
 	Proveedor,
 	Entradas,
@@ -9,12 +10,12 @@ from .models import(
 	)
 
 class RedirectView(TemplateView):
-    
+
 
     def get_context_data(self, **kwargs):
         context = super(RedirectView, self).get_context_data(**kwargs)
         return context
- 
+
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         if request.user.tipo == 'Administrador':
@@ -23,7 +24,7 @@ class RedirectView(TemplateView):
             return HttpResponseRedirect('/ventas/')
 
 class IndexView(TemplateView):
-    
+
     template_name = "index.html"
 
     def get_context_data(self, **kwargs):
@@ -38,3 +39,12 @@ class EntradasView(TemplateView):
         context = super(EntradasView, self).get_context_data(**kwargs)
         context['entradas'] = Entradas.objects.all()
         return context
+
+class ProveedoresView(TemplateView):
+	template_name = "proveedores.html"
+
+	def get_context_data(self, **kwargs):
+		context = super(ProveedoresView, self).get_context_data(**kwargs)
+		context['proveedores'] = Proveedor.objects.all()
+		context.update(proveedor_form=ProveedorForm())
+		return context

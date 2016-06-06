@@ -32,16 +32,16 @@
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="{% static "css/themify-icons.css" %}" rel="stylesheet">
 
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
 </head>
-<body>
+<body ng-app="SalesApp">
 
 <div class="wrapper">
     <div class="sidebar" data-background-color="white" data-active-color="danger">
 
-    <!--
-        Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
-        Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
-    -->
+
 
         <div class="sidebar-wrapper">
             <div class="logo">
@@ -54,7 +54,7 @@
                 <li class="active">
                     <a href="dashboard.html">
                         <i class="ti-panel"></i>
-                        <p>Dashboard</p>
+                        <p>Proveedores</p>
                     </a>
                 </li>
                 <li>
@@ -138,7 +138,7 @@
         <div class="content">
             <div class="container-fluid">
                 {% block contenido %}
-                    
+
                 {% endblock contenido %}
             </div>
         </div>
@@ -223,6 +223,11 @@
     <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
     <script src="{% static "js/demo.js" %}"></script>
 
+    <!--Modulos -->
+    <script src="{% static "js/app.js"%}"></script>
+    <script src="{% static "js/Controllers/Administrador/Entradas/EntradasController.js"%}"></script>
+    <script src="{% static "js/Controllers/Administrador/Proveedores/ProveedoresController.js"%}"></script>
+
     <script type="text/javascript">
         $(document).ready(function(){
 
@@ -240,6 +245,6 @@
         });
     </script>
     {% block js %}
-        
+
     {% endblock js %}
 </html>
