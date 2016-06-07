@@ -4,7 +4,7 @@ from .views import (
 	)
 
 urlpatterns = [
-   url(r'^$', RedirectView.as_view(), name='index'),
+   url(r'^$', RedirectView.as_view(), name='root'),
    url(r'^administrador/$', IndexView.as_view(), name='index'),
    url(r'^administrador/entradas/$', EntradasView.as_view(), name='entradas'),
    url(r'^administrador/proveedores/$', ProveedoresView.as_view(), name='proveedores'),

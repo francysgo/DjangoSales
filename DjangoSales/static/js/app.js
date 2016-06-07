@@ -1,4 +1,4 @@
-var SalesApp = angular.module('SalesApp', []);
+var SalesApp = angular.module('SalesApp', ['angularUtils.directives.dirPagination']);
 
 	SalesApp.config(function($interpolateProvider,$httpProvider) {
 	    $interpolateProvider.startSymbol('[[');
