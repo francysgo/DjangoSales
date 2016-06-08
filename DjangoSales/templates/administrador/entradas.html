@@ -34,7 +34,7 @@
                 <th class="text-center">ACCIONES</th>
             </tr></thead>
             <tbody>
-                <tr dir-paginate="x in entradas|orderBy:sortKey:reverse|filter:search|itemsPerPage:1">
+                <tr dir-paginate="x in entradas|orderBy:sortKey:reverse|filter:search|itemsPerPage:10">
                     <td>[[ x.id ]]</td>
                     <td>[[ x.proveedor ]]</td>
                     <td>[[ x.producto ]]</td>
@@ -42,7 +42,7 @@
 
                     <td class="text-center">
                         <a href="#fakelink" style="font-size:22px; color:#f0ad4e;"><i class="fa fa-edit"></i></a>
-                        <a href="#" data-id="[[ x.id ]]" style="font-size:22px; color:#d9534f; padding-left:10px;" data-producto="[[ x.producto ]]"  ng-click="eliminar($event)"><i class="fa fa-trash"></i></a>
+                        <a href="#" data-id="[[ x.id ]]" style="font-size:22px; color:#d9534f; padding-left:10px;" data-producto="[[ x.producto ]]"  ng-click="datosEliminar(x,$index)"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -59,21 +59,23 @@
 {% block modales %}
     <div class="modal fade" id="eliminar_entrada" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
       <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content" ng-controller="entradasController">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h4 class="modal-title" id="myModalLabel">Eliminar</h4>
           </div>
           <div class="modal-body">
-            <p>¿Deseas eliminar la entrada <strong id="nombre_entrada"></strong>?</p>
+            <p>¿Deseas eliminar la entrada <strong>[[ getText() ]]</strong>?</p>
           </div>
           <div class="modal-footer">
             <div class="divider"></div>
-            <p>
-                <input type="hidden" id="id_entrada">
+            <form>
+               <p>
+                <input type="hidden" id="id_entrada" ng-model="idEliminar" value="[[ getId() ]]">
                 <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-danger btn-simple">Eliminar</button>
-            </p>
+                <button type="submit" class="btn btn-danger btn-simple" ng-click="eliminarEntrada()">Eliminar</button>
+            </p> 
+            </form>
           </div>
         </div>
       </div>
