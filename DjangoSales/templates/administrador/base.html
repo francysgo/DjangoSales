@@ -54,10 +54,10 @@
                         <p>Dashborad</p>
                     </a>
                 </li>
-                <li {% block entradas %}{% endblock entradas %}>
-                    <a href="{% url 'entradas' %}">
-                        <i class="fa fa-car" aria-hidden="true"></i>
-                        <p>Entradas</p>
+                <li {% block productos %}{% endblock productos %}>
+                    <a href="{% url 'productos' %}">
+                        <i class="fa fa-archive" aria-hidden="true"></i>
+                        <p>Productos</p>
                     </a>
                 </li>
                 <li>
@@ -210,7 +210,7 @@
 
     <!--Modulos -->
     <script src="{% static "js/app.js"%}"></script>
-    <script src="{% static "js/Controllers/Administrador/Entradas/EntradasController.js"%}"></script>
+    <script src="{% static "js/Controllers/Administrador/Entradas/productosController.js"%}"></script>
     <script src="{% static "js/Controllers/Administrador/Proveedores/ProveedoresController.js"%}"></script>
 
     <script type="text/javascript">

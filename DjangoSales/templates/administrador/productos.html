@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block titulo %}Productos{% endblock titulo %}
+{% block productos %}class="active"{% endblock productos %}
+{% block navbar %}Productos{% endblock navbar %}
+{% block contenido %}
+<div class="card" ng-controller="productosController">
+    <div class="header">
+        <h4 class="title">Producto</h4>
+        <p class="category">Aquí se muestran todos los productos</p>
+    </div><br />
+    <p style="padding-left:10px;"><button class="btn btn-primary" data-toggle="modal" data-target="#agregar_producto">Nuevo</button></p>
+    <div class="content table-responsive table-full-width">
+        <form class="form-inline">
+            <div class="form-group" style="padding-left:10px;">
+                <label >Busqueda</label>
+                <input type="text" ng-model="search" class="form-control" placeholder="Search">
+            </div>
+        </form>
+        <table class="table table-striped" id="example">
+            <thead>
+                <th ng-click="sort('upc')">UPC
+                    <span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th ng-click="sort('proveedor')">Proveedor
+                    <span class="glyphicon sort-icon" ng-show="sortKey=='proveedor'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th ng-click="sort('nombre')">Nombre
+                    <span class="glyphicon sort-icon" ng-show="sortKey=='nombre'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th ng-click="sort('fecha')">Fecha
+                    <span class="glyphicon sort-icon" ng-show="sortKey=='fecha'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th class="text-center">ACCIONES</th>
+            </tr></thead>
+            <tbody>
+                <tr dir-paginate="x in productos|orderBy:sortKey:reverse|filter:search|itemsPerPage:10">
+                    <td>[[ x.upc ]]</td>
+                    <td>[[ x.proveedor ]]</td>
+                    <td>[[ x.nombre ]]</td>
+                    <td>[[ x.fecha ]]</td>
+
+                    <td class="text-center">
+                        <a href="#fakelink" style="font-size:22px; color:#f0ad4e;"><i class="fa fa-edit"></i></a>
+                        <a data-id="[[ x.id ]]" style="font-size:22px; color:#d9534f; padding-left:10px;" data-producto="[[ x.nombre ]]"  ng-click="datosEliminar(x,$index)"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <dir-pagination-controls
+            max-size="5"
+            direction-links="true"
+            boundary-links="true" >
+        </dir-pagination-controls>
+    </div>
+</div>
+{% endblock contenido %}
+
+{% block modales %}
+    <div class="modal fade" id="eliminar_producto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog">
+        <div class="modal-content" ng-controller="productosController">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title" id="myModalLabel">Eliminar</h4>
+          </div>
+          <div class="modal-body">
+            <p>¿Deseas eliminar el producto <strong>[[ getText() ]]</strong>?</p>
+          </div>
+          <div class="modal-footer">
+            <div class="divider"></div>
+            <form>
+               <p>
+                <input type="hidden" id="id_entrada" ng-model="idEliminar" value="[[ getId() ]]">
+                <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-danger btn-simple" ng-click="eliminarProducto()">Eliminar</button>
+            </p> 
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="agregar_producto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog">
+        <div class="modal-content" ng-controller="productosController">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title" id="myModalLabel">Agregar</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>{{ form.upc.label }}</label>
+                    {{ form.upc }}
+                </div>
+                <div class="col-md-6">
+                    <label>{{ form.nombre.label }}</label>
+                    {{ form.nombre }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label>{{ form.proveedor.label }}</label>
+                    {{ form.proveedor }}
+                </div>
+                <div class="col-md-6">
+                    <label>{{ form.categoria.label }}</label>
+                    {{ form.categoria }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label>{{ form.unidad.label }}</label>
+                    {{ form.unidad }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label>{{ form.precio_entrada.label }}</label>
+                    {{ form.precio_entrada }}
+                </div>
+                <div class="col-md-6">
+                    <label>{{ form.precio_salida.label }}</label>
+                    {{ form.precio_salida }}
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="divider"></div>
+            <form>
+               <p>
+                <input type="hidden" id="id_entrada" ng-model="idEliminar" value="[[ getId() ]]">
+                <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-success btn-simple" ng-click="eliminarProducto()">Guaradr</button>
+            </p> 
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock modales %}
+{% block js %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/u/bs/dt-1.10.12/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/u/bs/dt-1.10.12/datatables.min.js"></script>
+<script type="text/javascript">
+    //$('#example').dataTable();
+</script>
+{% endblock js %}

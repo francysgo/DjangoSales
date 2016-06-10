@@ -2,10 +2,10 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from .forms import ProveedorForm
+from .forms import ProveedorForm, ProductoForm
 from .models import(
 	Proveedor,
-	Entradas,
+	Producto,
 	Inventario
 	)
 
@@ -32,13 +32,13 @@ class IndexView(TemplateView):
         return context
 
 
-class EntradasView(TemplateView):
+class ProductoView(TemplateView):
 
-    template_name = "entradas.html"
+    template_name = "productos.html"
 
     def get_context_data(self, **kwargs):
-        context = super(EntradasView, self).get_context_data(**kwargs)
-        context['entradas'] = Entradas.objects.all()
+        context = super(ProductoView, self).get_context_data(**kwargs)
+        context['form'] = ProductoForm()
         return context
 
 class ProveedoresView(TemplateView):

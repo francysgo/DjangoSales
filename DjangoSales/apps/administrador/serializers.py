@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from .models import CatalogoCategoria, Proveedor, Entradas, CatalogoUnidades
+from .models import CatalogoCategoria, Proveedor, Producto, CatalogoUnidades
 from rest_framework import routers, serializers, viewsets
 from rest_framework.response import Response
 
@@ -25,44 +25,44 @@ class ProveedorViewSet(viewsets.ModelViewSet):
 	serializer_class = ProveedorSerializer
 
 # Serializers define the API representation.
-class EntradasSerializer(serializers.HyperlinkedModelSerializer):
+class ProductoSerializer(serializers.HyperlinkedModelSerializer):
 
     categoria = serializers.PrimaryKeyRelatedField(source='categoria.nombre', queryset=CatalogoCategoria.objects.all())
     unidad = serializers.PrimaryKeyRelatedField(source='unidad.nombre', queryset=CatalogoUnidades.objects.all())
     proveedor = serializers.PrimaryKeyRelatedField(source='proveedor.nombre', queryset=Proveedor.objects.all())
 
     class Meta:
-        model = Entradas
-        fields = ('id','proveedor', 'producto', 'cantidad', 'categoria', 'unidad','precio_entrada', 'precio_salida', 'fecha')
+        model = Producto
+        fields = ('id', 'upc', 'proveedor', 'nombre', 'categoria', 'unidad','precio_entrada', 'precio_salida', 'fecha')
 
 # ViewSets define the view behavior.
-class EntradasViewSet(viewsets.ModelViewSet):
+class ProductoViewSet(viewsets.ModelViewSet):
 
-    queryset = Entradas.objects.all()
-    serializer_class = EntradasSerializer
+    queryset = Producto.objects.all()
+    serializer_class = ProductoSerializer
 
 
     def create(self, validated_data):
         proveedor = Proveedor.objects.get(id=validated_data.POST["proveedor"])
         categoria = CatalogoCategoria.objects.get(id=validated_data.POST["categoria"])
         unidad = CatalogoUnidades.objects.get(id=validated_data.POST["unidad"])
-        entrada = Entradas.objects.create(producto=validated_data.POST['producto'],
-            cantidad=validated_data.POST['cantidad'],
+        entrada = Producto.objects.create(nombre=validated_data.POST['nombre'],
+            upc=validated_data.POST['upc'],
             unidad=unidad,
             categoria=categoria,
             proveedor=proveedor,
             precio_entrada = validated_data.POST['precio_entrada'],
             precio_salida = validated_data.POST['precio_salida'])
-        return Response({'producto':entrada.producto})
+        return Response({'producto':entrada.nombre})
 
     def update(self, validated_data, pk):
 
-        updated_instance = Entradas.objects.get(pk=pk)
+        updated_instance = Producto.objects.get(pk=pk)
         proveedor = Proveedor.objects.get(id=validated_data.POST["proveedor"])
         unidad = CatalogoUnidades.objects.get(id=validated_data.POST["unidad"])
         categoria = CatalogoCategoria.objects.get(id=validated_data.POST["categoria"])
-        updated_instance.producto=validated_data.POST['producto']
-        updated_instance.cantidad=validated_data.POST['cantidad']
+        updated_instance.upc=validated_data.POST['upc']
+        updated_instance.nombre=validated_data.POST['nombre']
         updated_instance.unidad=unidad
         updated_instance.categoria=categoria
         updated_instance.proveedor=proveedor

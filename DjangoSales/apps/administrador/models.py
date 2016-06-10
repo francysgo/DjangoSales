@@ -15,8 +15,8 @@ class CatalogoUnidades(models.Model):
 		verbose_name = "CatalogoUnidad"
 		verbose_name_plural = "Catalogo Unidades"
 
-		def __str__(self):
-			return self.nombre
+	def __str__(self):
+		return self.nombre
 
 class CatalogoCategoria(models.Model):
 
@@ -44,34 +44,29 @@ class Proveedor(models.Model):
 	def __str__(self):
 		return self.nombre
 
-class Entradas(models.Model):
+class Producto(models.Model):
 
-	producto = models.CharField(max_length=50)
+	upc = models.BigIntegerField(null=True,blank=True, unique=True)
+	nombre = models.CharField(max_length=50)
 	proveedor = models.ForeignKey(Proveedor)
-	cantidad = models.FloatField(default=0)
 	categoria = models.ForeignKey(CatalogoCategoria,default=0)
 	unidad = models.ForeignKey(CatalogoUnidades,default=0)
 	precio_entrada = models.FloatField(default=0)
 	precio_salida = models.FloatField(default=0)
 	fecha = models.DateField(auto_now_add=True)
+	is_active = models.BooleanField(default=True)
 
 	class Meta:
-		verbose_name=' Entradas'
-		verbose_name_plural = 'Entradas'
+		verbose_name='Producto'
+		verbose_name_plural = 'Productos'
 
 	def __str__(self):
-		return self.producto
+		return self.nombre
 
 class Inventario(models.Model):
 
-	upc = models.BigIntegerField(null=True,blank=True)
-	nombre_producto = models.CharField(max_length=50)
-	categoria = models.ForeignKey(CatalogoCategoria,default=0)
-	proveedor = models.ForeignKey(Proveedor)
+	producto = models.ForeignKey(Producto)
 	cantidad = models.FloatField(default=0)
-	tipo = models.CharField(max_length=50,choices=unidades)
-	precio = models.FloatField(default=0)
-	is_active = models.BooleanField(default=True)
 
 	def __str__(self):
 		return self.producto

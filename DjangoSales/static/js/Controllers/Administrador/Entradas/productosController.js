@@ -4,21 +4,21 @@ SalesApp.service('eliminarService', function() {
 	this.index = '';
 });
 
-SalesApp.controller('entradasController', function($scope, $http, eliminarService) {
+SalesApp.controller('productosController', function($scope, $http, eliminarService) {
 
-    $http.get('/api/entradas.json')
+    $http.get('/api/productos.json')
 	        .success(function(data) {
-	            $scope.entradas = data;
+	            $scope.productos = data;
 	        })
 	        .error(function(data) {
 	            console.log('Error: ' + data);
 	        });
 
     $scope.datosEliminar = function(item,index){
-    	eliminarService.text_eliminar = item.producto;
+    	eliminarService.text_eliminar = item.nombre;
     	eliminarService.id_eliminar = item.id;
     	eliminarService.index = index;
-    	$('#eliminar_entrada').modal('show');
+    	$('#eliminar_producto').modal('show');
     }
 
     $scope.getText = function() {
@@ -28,12 +28,13 @@ SalesApp.controller('entradasController', function($scope, $http, eliminarServic
     	return eliminarService.id_eliminar;
   	}
 
-  	$scope.eliminarEntrada = function(item){
-  		url = '/api/entradas/' + eliminarService.id_eliminar;
+  	$scope.eliminarProducto = function(item){
+  		url = '/api/productos/' + eliminarService.id_eliminar;
 
   		$http.delete(url)
 	    .success(function(data) {
-	            cargarDatos();
+	    		$('#eliminar_producto').modal('hide');
+	            location.reload();
 	    })
 	    .error(function(data) {
 	             console.log('Error: ' + data);
@@ -46,18 +47,3 @@ SalesApp.controller('entradasController', function($scope, $http, eliminarServic
 	}
 
 });
-
-// SalesApp.controller('eliminarController', function($scope, $rootScope, $http) {
-// 	$scope.id_eliminar = $rootScope.id_eliminar;
-// 	$scope.text_eliminar = $rootScope.text_eliminar;
-// 	console.log($scope.text_eliminar);
-// 	console.log($scope.id_eliminar );
-// 	$scope.eliminarEntrada = function(){
-    	
-//     }
-
-//     $scope.eliminarEntrada = function(){
-//     	var id_eliminar = $scope.id_eliminar;
-//     	console.log(id_eliminar);
-//     }
-// });
