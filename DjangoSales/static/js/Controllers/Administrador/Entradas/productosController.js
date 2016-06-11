@@ -4,6 +4,31 @@ SalesApp.service('eliminarService', function() {
 	this.index = '';
 });
 
+
+SalesApp.controller('addProductoController', function($scope, $http) {
+	
+	$scope.addProducto = function(){
+  		var data = {
+		'upc' : $scope.upc,
+		'nombre' : $scope.nombre,
+		'proveedor' : $scope.proveedor,
+		'categoria' : $scope.categoria,
+		'unidad' : $scope.unidad,
+		'precio_entrada' : $scope.precio_entrada,
+		'precio_salida' : $scope.precio_salida
+		};
+		$http({
+			  method: 'POST',
+			  url: '/api/productos/',
+			  data: data,
+		}).then(function successCallback(response) {
+			    console.log(response);
+			  }, function errorCallback(response) {
+			    console.log(response);
+			  });
+			  	}
+});
+
 SalesApp.controller('productosController', function($scope, $http, eliminarService) {
 
     $http.get('/api/productos.json')
@@ -40,6 +65,7 @@ SalesApp.controller('productosController', function($scope, $http, eliminarServi
 	             console.log('Error: ' + data);
 	    });
   	}
+
 
    $scope.sort = function(keyname){
 		$scope.sortKey = keyname;   //set the sortKey to the param passed
