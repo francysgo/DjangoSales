@@ -1,4 +1,4 @@
-var SalesApp = angular.module('SalesApp', ['angularUtils.directives.dirPagination'],['angular-loading-bar', 'ngAnimate']);
+var SalesApp = angular.module('SalesApp', ['angularUtils.directives.dirPagination','angular-loading-bar']);
 
 	SalesApp.config(function($interpolateProvider,$httpProvider) {
 	    $interpolateProvider.startSymbol('[[');
