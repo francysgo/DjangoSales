@@ -42,17 +42,17 @@ class ProductoViewSet(viewsets.ModelViewSet):
     serializer_class = ProductoSerializer
 
 
-    def create(self, validated_data):
-        proveedor = Proveedor.objects.get(id=validated_data.POST["proveedor"])
-        categoria = CatalogoCategoria.objects.get(id=validated_data.POST["categoria"])
-        unidad = CatalogoUnidades.objects.get(id=validated_data.POST["unidad"])
-        entrada = Producto.objects.create(nombre=validated_data.POST['nombre'],
-            upc=validated_data.POST['upc'],
+    def create(self, request, *args, **kwargs):
+        proveedor = Proveedor.objects.get(id=request.data['proveedor'])
+        categoria = CatalogoCategoria.objects.get(id=request.data['categoria'])
+        unidad = CatalogoUnidades.objects.get(id=request.data['unidad'])
+        entrada = Producto.objects.create(nombre=request.data['nombre'],
+            upc=request.data['upc'],
             unidad=unidad,
             categoria=categoria,
             proveedor=proveedor,
-            precio_entrada = validated_data.POST['precio_entrada'],
-            precio_salida = validated_data.POST['precio_salida'])
+            precio_entrada = request.data['precio_entrada'],
+            precio_salida = request.data['precio_salida'])
         return Response({'producto':entrada.nombre})
 
     def update(self, validated_data, pk):

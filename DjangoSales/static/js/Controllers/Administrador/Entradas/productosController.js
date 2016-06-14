@@ -8,25 +8,20 @@ SalesApp.service('eliminarService', function() {
 SalesApp.controller('addProductoController', function($scope, $http) {
 	
 	$scope.addProducto = function(){
-  		var data = {
-		'upc' : $scope.upc,
-		'nombre' : $scope.nombre,
-		'proveedor' : $scope.proveedor,
-		'categoria' : $scope.categoria,
-		'unidad' : $scope.unidad,
-		'precio_entrada' : $scope.precio_entrada,
-		'precio_salida' : $scope.precio_salida
-		};
-		$http({
-			  method: 'POST',
-			  url: '/api/productos/',
-			  data: data,
-		}).then(function successCallback(response) {
-			    console.log(response);
-			  }, function errorCallback(response) {
-			    console.log(response);
-			  });
-			  	}
+  		var data = {};
+		data.upc = $scope.upc;
+		data.nombre = $scope.nombre;
+		data.proveedor = parseInt($scope.proveedor);
+		data.categoria = parseInt($scope.categoria);
+		data.unidad = parseInt($scope.unidad);
+		data.precio_entrada = $scope.precio_entrada;
+		data.precio_salida = $scope.precio_salida;
+
+		console.log(data);
+		$http.post('/api/productos/',data).success(function(data){
+			location.reload();
+		});
+	}
 });
 
 SalesApp.controller('productosController', function($scope, $http, eliminarService) {
