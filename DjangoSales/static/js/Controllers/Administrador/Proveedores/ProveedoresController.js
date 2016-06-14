@@ -1,8 +1,11 @@
 SalesApp.controller('proveedoresController', function($scope, $http,$rootScope) {
 
+
+ var obtenerLista=function(){
   $http.get('/api/proveedores/').success(function(data) {
         $scope.proveedores=data;
        });
+}
 
 $scope.EditarProveedor=function(proveedor){
   $rootScope.$emit('test',proveedor);
@@ -13,10 +16,19 @@ $scope.Agregaproveedor=function(){
      $('#Modalproveedor').modal('show');
 }
 
+obtenerLista();
+
 });
 
 
 SalesApp.controller('EditproveedoresController', function($scope, $http,$rootScope) {
+
+ var obtenerLista=function(){
+  $http.get('/api/proveedores/').success(function(data) {
+        $scope.proveedores=data;
+       });
+}
+
 
   $rootScope.$on('test', function(event,data) {
            $('#Modalproveedor').modal('show');
@@ -38,8 +50,9 @@ $scope.Editproveedor=function(){
   Proveedor.direccion=$scope.direccion;
   Proveedor.correo=$scope.correo;
 
-  $http.post('/api/proveedores/',Proveedor).success(function(data) {
-    $('#Modalproveedor').modal('hide')
+  $http.put('/api/proveedores/'+Proveedor.id+'/',JSON.stringify(Proveedor)).success(function(data) {
+    $('#Modalproveedor').modal('hide');
+    obtenerLista();
     $.notify({icon: 'ti-thumb-up',message: "El proveedor se ha editado correctamente"},{ type: 'success',timer: 4000});
        });
 }
@@ -52,7 +65,8 @@ $scope.Addproveedor=function(){
   Proveedor.correo=$scope.correo;
 
   $http.post('/api/proveedores/',Proveedor).success(function(data) {
-    $('#Modalproveedor').modal('hide')
+    $('#Modalproveedor').modal('hide');
+    obtenerLista();
     $.notify({icon: 'ti-thumb-up',message: "El proveedor se ha agregado correctamente"},{ type: 'success',timer: 4000});
        });
 

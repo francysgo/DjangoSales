@@ -72,20 +72,20 @@ class ProveedorViewSet(viewsets.ModelViewSet):
     queryset = Proveedor.objects.all()
     serializer_class = ProveedorSerializer
 
-    def create(self, validated_data):
-        entrada = Proveedor.objects.create(
-        nombre=validated_data.POST.get('nombre'),
-        telefono=validated_data.POST.get('telefono'),
-        direccion=validated_data.POST.get('correo'),
-        correo=validated_data.POST.get('direccion'),
-        )
-        return Response({'entrada':entrada.nombre})
+    # def create(self, validated_data):
+    #     entrada = Proveedor.objects.create(
+    #     nombre=validated_data.POST.get('nombre'),
+    #     telefono=validated_data.POST.get('telefono'),
+    #     direccion=validated_data.POST.get('correo'),
+    #     correo=validated_data.POST.get('direccion'),
+    #     )
+    #     return Response({'entrada':entrada.nombre})
 
-    def update(self, validated_data, pk):
-        updated_instance = Producto.objects.get(pk=pk)
-        updated_instance.nombre=validated_data.POST['nombre']
-        updated_instance.telefono=validated_data.POST['telefono']
-        updated_instance.direccion=validated_data.POST['direccion']
-        updated_instance.correo=validated_data.POST['correo']
-        updated_instance.save()
-        return updated_instance
+    # def update(self, validated_data, pk):
+    #     updated_instance = Producto.objects.get(pk=pk)
+    #     updated_instance.nombre=validated_data.POST['nombre']
+    #     updated_instance.telefono=validated_data.POST['telefono']
+    #     updated_instance.direccion=validated_data.POST['direccion']
+    #     updated_instance.correo=validated_data.POST['correo']
+    #     updated_instance.save()
+    #     return updated_instance
