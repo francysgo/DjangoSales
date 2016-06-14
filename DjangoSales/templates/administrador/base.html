@@ -31,9 +31,15 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="{% static "css/themify-icons.css" %}" rel="stylesheet">
+    <!--angular loader-->
+      <link rel='stylesheet' href='http://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css' type='text/css' media='all' />
+
+
+
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
 
 </head>
 <body ng-app="SalesApp">
@@ -88,7 +94,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-wrench" aria-hidden="true"></i>
                         <p>Catálogos <b class="caret"></b></p>
-                        
+
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Catalogo Unidades</a></li>
@@ -175,9 +181,9 @@
         </footer>
     </div>
 
-    
+
 {% block modales %}
-    
+
 {% endblock modales %}
 </div>
 
@@ -207,6 +213,9 @@
 
     <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
     <script src="{% static "js/demo.js" %}"></script>
+
+
+<script type='text/javascript' src='http://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js'></script>
 
     <!--Modulos -->
     <script src="{% static "js/app.js"%}"></script>
