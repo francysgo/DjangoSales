@@ -51,8 +51,6 @@ class Producto(models.Model):
 	proveedor = models.ForeignKey(Proveedor)
 	categoria = models.ForeignKey(CatalogoCategoria)
 	unidad = models.ForeignKey(CatalogoUnidades)
-	precio_entrada = models.FloatField(default=0)
-	precio_salida = models.FloatField(default=0)
 	fecha = models.DateField(auto_now_add=True)
 	is_active = models.BooleanField(default=True)
 
@@ -67,6 +65,22 @@ class Inventario(models.Model):
 
 	producto = models.ForeignKey(Producto)
 	cantidad = models.FloatField(default=0)
+	precio_entrada = models.FloatField(default=0)
+	precio_salida = models.FloatField(default=0)
+
+	def __str__(self):
+		return self.producto
+
+class Entradas(models.Model):
+
+	producto = models.ForeignKey(Producto)
+	cantidad = models.FloatField(default=0)
+	precio_entrada = models.FloatField(default=0)
+	precio_salida = models.FloatField(default=0)
+
+	class Meta:
+		verbose_name='Entrada'
+		verbose_name_plural = 'Entradas'
 
 	def __str__(self):
 		return self.producto

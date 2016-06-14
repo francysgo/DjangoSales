@@ -42,7 +42,7 @@
 
                     <td class="text-center">
                         <a href="#fakelink" style="font-size:22px; color:#f0ad4e;"><i class="fa fa-edit"></i></a>
-                        <a data-id="[[ x.id ]]" style="font-size:22px; color:#d9534f; padding-left:10px;" data-producto="[[ x.nombre ]]"  ng-click="datosEliminar(x,$index)"><i class="fa fa-trash"></i></a>
+                        <a href="#" data-id="[[ x.id ]]" style="font-size:22px; color:#d9534f; padding-left:10px;" data-producto="[[ x.nombre ]]"  ng-click="datosEliminar(x,$index)"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -95,6 +95,8 @@
                     <label>{{ form.upc.label }}</label>
                     {{ form.upc }}
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-md-7">
                     <label>{{ form.nombre.label }}</label>
                     {{ form.nombre }}
@@ -114,16 +116,6 @@
                 <div class="col-md-6">
                     <label>{{ form.unidad.label }}</label>
                     {{ form.unidad }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label>{{ form.precio_entrada.label }}</label>
-                    {{ form.precio_entrada }}
-                </div>
-                <div class="col-md-6">
-                    <label>{{ form.precio_salida.label }}</label>
-                    {{ form.precio_salida }}
                 </div>
             </div>
           </div>

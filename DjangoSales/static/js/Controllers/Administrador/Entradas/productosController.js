@@ -20,7 +20,11 @@ SalesApp.controller('addProductoController', function($scope, $http) {
 		console.log(data);
 		$http.post('/api/productos/',data).success(function(data){
 			location.reload();
-		});
+		})
+		.error(function(data) {
+	            console.log('Error: ' + data);
+	        });
+		;
 	}
 });
 

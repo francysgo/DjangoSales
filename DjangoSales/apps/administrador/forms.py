@@ -24,9 +24,9 @@ class ProductoForm(NgFormValidationMixin ,  NgModelForm):
         super(ProductoForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['required'] = ' '
-            field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['class'] = 'form-control border-input'
 
 
     class Meta:
         model = Producto
-        fields = ('upc', 'proveedor','nombre','categoria', 'unidad', 'precio_entrada','precio_salida')
+        fields = ('upc', 'proveedor','nombre','categoria', 'unidad')

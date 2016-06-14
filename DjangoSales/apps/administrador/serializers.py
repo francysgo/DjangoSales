@@ -25,7 +25,7 @@ class ProductoSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Producto
-        fields = ('id', 'upc', 'proveedor', 'nombre', 'categoria', 'unidad','precio_entrada', 'precio_salida', 'fecha')
+        fields = ('id', 'upc', 'proveedor', 'nombre', 'categoria', 'unidad', 'fecha')
 
 # ViewSets define the view behavior.
 class ProductoViewSet(viewsets.ModelViewSet):
@@ -42,9 +42,7 @@ class ProductoViewSet(viewsets.ModelViewSet):
             upc=request.data['upc'],
             unidad=unidad,
             categoria=categoria,
-            proveedor=proveedor,
-            precio_entrada = request.data['precio_entrada'],
-            precio_salida = request.data['precio_salida'])
+            proveedor=proveedor)
         return Response({'producto':entrada.nombre})
 
     def update(self, validated_data, pk):
@@ -58,8 +56,6 @@ class ProductoViewSet(viewsets.ModelViewSet):
         updated_instance.unidad=unidad
         updated_instance.categoria=categoria
         updated_instance.proveedor=proveedor
-        updated_instance.precio_entrada = validated_data.POST['precio_entrada']
-        updated_instance.precio_salida = validated_data.POST['precio_salida']
         updated_instance.save()
         return updated_instance
 
