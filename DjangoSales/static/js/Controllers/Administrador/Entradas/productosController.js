@@ -1,35 +1,11 @@
-SalesApp.service('eliminarService', function() {
+SalesApp.service('productoService', function() {
 	this.text_eliminar= '';
 	this.id_eliminar= '';
 	this.index = '';
 });
 
 
-SalesApp.controller('addProductoController', function($scope, $http) {
-	
-	$scope.addProducto = function(){
-  		var data = {
-		'upc' : $scope.upc,
-		'nombre' : $scope.nombre,
-		'proveedor' : $scope.proveedor,
-		'categoria' : $scope.categoria,
-		'unidad' : $scope.unidad,
-		'precio_entrada' : $scope.precio_entrada,
-		'precio_salida' : $scope.precio_salida
-		};
-		$http({
-			  method: 'POST',
-			  url: '/api/productos/',
-			  data: data,
-		}).then(function successCallback(response) {
-			    console.log(response);
-			  }, function errorCallback(response) {
-			    console.log(response);
-			  });
-			  	}
-});
-
-SalesApp.controller('productosController', function($scope, $http, eliminarService) {
+SalesApp.controller('productosController', function($scope, $http, productoService) {
 
     $http.get('/api/productos.json')
 	        .success(function(data) {
@@ -40,21 +16,22 @@ SalesApp.controller('productosController', function($scope, $http, eliminarServi
 	        });
 
     $scope.datosEliminar = function(item,index){
-    	eliminarService.text_eliminar = item.nombre;
-    	eliminarService.id_eliminar = item.id;
-    	eliminarService.index = index;
+    	productoService.text_eliminar = item.nombre;
+    	productoService.id_eliminar = item.id;
+    	productoService.index = index;
+    	productoService.obj = item;
     	$('#eliminar_producto').modal('show');
     }
 
     $scope.getText = function() {
-    	return eliminarService.text_eliminar;
+    	return productoService.text_eliminar;
   	}
   	$scope.getId = function() {
-    	return eliminarService.id_eliminar;
+    	return productoService.id_eliminar;
   	}
 
-  	$scope.eliminarProducto = function(item){
-  		url = '/api/productos/' + eliminarService.id_eliminar;
+  	$scope.eliminarProducto = function(){
+  		url = '/api/productos/' + productoService.id_eliminar;
 
   		$http.delete(url)
 	    .success(function(data) {
@@ -70,6 +47,31 @@ SalesApp.controller('productosController', function($scope, $http, eliminarServi
    $scope.sort = function(keyname){
 		$scope.sortKey = keyname;   //set the sortKey to the param passed
 		$scope.reverse = !$scope.reverse; //if true make it false and vice versa
+	}
+	$scope.addProducto = function(){
+  		var data = {};
+		data.upc = $scope.upc;
+		data.nombre = $scope.nombre;
+		data.proveedor = parseInt($scope.proveedor);
+		data.categoria = parseInt($scope.categoria);
+		data.unidad = parseInt($scope.unidad);
+
+		console.log(data);
+		$http.post('/api/productos/',data).success(function(data){
+			location.reload();
+		})
+		.error(function(data) {
+	            console.log('Error: ' + data);
+	        });
+		;
+	}
+	$scope.detalleProducto = function(item){
+        $('#id_upc').val(item.upc);
+		$('#id_nombre').val(item.nombre);
+		$('#id_proveedor').val(item.proveedor.id).change();
+		$('#id_categoria').val(item.categoria.id).change();
+		$('#id_unidad').val(item.unidad.id).change();
+		$('#editar_producto').modal('show');
 	}
 
 });

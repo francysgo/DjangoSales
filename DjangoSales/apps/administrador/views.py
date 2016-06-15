@@ -3,6 +3,8 @@ from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .forms import ProveedorForm, ProductoForm
+from .serializers import ProductoSerializer
+from rest_framework.views import APIView
 from .models import(
 	Proveedor,
 	Producto,
@@ -49,3 +51,12 @@ class ProveedoresView(TemplateView):
 		context['proveedores'] = Proveedor.objects.all()
 		context.update(proveedor_form=ProveedorForm())
 		return context
+
+class ProdcutosApiView(APIView):
+
+    serializer_class = ProductoSerializer
+
+    def get(self, request, id=None, format=None):
+        productos = Producto.objects.all()
+        response = self.serializer_class(productos, many=True)
+        return Response(response.data)

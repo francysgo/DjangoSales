@@ -3,6 +3,10 @@ from .models import CatalogoCategoria, Proveedor, Producto, CatalogoUnidades
 from rest_framework import routers, serializers, viewsets
 from rest_framework.response import Response
 
+class UnidadSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = CatalogoUnidades
+        fields = ('id','nombre')
 
 class CategoriaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -14,18 +18,21 @@ class CategoriarViewSet(viewsets.ModelViewSet):
 	queryset = CatalogoCategoria.objects.all()
 	serializer_class = CategoriaSerializer
 
-
+class ProveedorProductosSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Proveedor
+        fields = ('id','nombre')
 
 # Serializers define the API representation.
 class ProductoSerializer(serializers.HyperlinkedModelSerializer):
-
-    categoria = serializers.PrimaryKeyRelatedField(source='categoria.nombre', queryset=CatalogoCategoria.objects.all())
-    unidad = serializers.PrimaryKeyRelatedField(source='unidad.nombre', queryset=CatalogoUnidades.objects.all())
-    proveedor = serializers.PrimaryKeyRelatedField(source='proveedor.nombre', queryset=Proveedor.objects.all())
+    #serializers.PrimaryKeyRelatedField(source='proveedor.nombre', queryset=Proveedor.objects.all())
+    categoria = CategoriaSerializer()
+    unidad = UnidadSerializer()
+    proveedor = ProveedorProductosSerializer()
 
     class Meta:
         model = Producto
-        fields = ('id', 'upc', 'proveedor', 'nombre', 'categoria', 'unidad','precio_entrada', 'precio_salida', 'fecha')
+        fields = ('id', 'upc', 'proveedor', 'nombre', 'categoria', 'unidad')
 
 # ViewSets define the view behavior.
 class ProductoViewSet(viewsets.ModelViewSet):
@@ -34,17 +41,15 @@ class ProductoViewSet(viewsets.ModelViewSet):
     serializer_class = ProductoSerializer
 
 
-    def create(self, validated_data):
-        proveedor = Proveedor.objects.get(id=validated_data.POST["proveedor"])
-        categoria = CatalogoCategoria.objects.get(id=validated_data.POST["categoria"])
-        unidad = CatalogoUnidades.objects.get(id=validated_data.POST["unidad"])
-        entrada = Producto.objects.create(nombre=validated_data.POST['nombre'],
-            upc=validated_data.POST['upc'],
+    def create(self, request, *args, **kwargs):
+        proveedor = Proveedor.objects.get(id=request.data['proveedor'])
+        categoria = CatalogoCategoria.objects.get(id=request.data['categoria'])
+        unidad = CatalogoUnidades.objects.get(id=request.data['unidad'])
+        entrada = Producto.objects.create(nombre=request.data['nombre'],
+            upc=request.data['upc'],
             unidad=unidad,
             categoria=categoria,
-            proveedor=proveedor,
-            precio_entrada = validated_data.POST['precio_entrada'],
-            precio_salida = validated_data.POST['precio_salida'])
+            proveedor=proveedor)
         return Response({'producto':entrada.nombre})
 
     def update(self, validated_data, pk):
@@ -58,8 +63,6 @@ class ProductoViewSet(viewsets.ModelViewSet):
         updated_instance.unidad=unidad
         updated_instance.categoria=categoria
         updated_instance.proveedor=proveedor
-        updated_instance.precio_entrada = validated_data.POST['precio_entrada']
-        updated_instance.precio_salida = validated_data.POST['precio_salida']
         updated_instance.save()
         return updated_instance
 
@@ -71,21 +74,3 @@ class ProveedorSerializer(serializers.HyperlinkedModelSerializer):
 class ProveedorViewSet(viewsets.ModelViewSet):
     queryset = Proveedor.objects.all()
     serializer_class = ProveedorSerializer
-
-    # def create(self, validated_data):
-    #     entrada = Proveedor.objects.create(
-    #     nombre=validated_data.POST.get('nombre'),
-    #     telefono=validated_data.POST.get('telefono'),
-    #     direccion=validated_data.POST.get('correo'),
-    #     correo=validated_data.POST.get('direccion'),
-    #     )
-    #     return Response({'entrada':entrada.nombre})
-
-    # def update(self, validated_data, pk):
-    #     updated_instance = Producto.objects.get(pk=pk)
-    #     updated_instance.nombre=validated_data.POST['nombre']
-    #     updated_instance.telefono=validated_data.POST['telefono']
-    #     updated_instance.direccion=validated_data.POST['direccion']
-    #     updated_instance.correo=validated_data.POST['correo']
-    #     updated_instance.save()
-    #     return updated_instance
