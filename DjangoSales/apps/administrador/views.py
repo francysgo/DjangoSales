@@ -8,7 +8,8 @@ from rest_framework.views import APIView
 from .models import(
 	Proveedor,
 	Producto,
-	Inventario
+	Inventario,
+    CatalogoCategoria
 	)
 
 class RedirectView(TemplateView):
@@ -60,3 +61,13 @@ class ProdcutosApiView(APIView):
         productos = Producto.objects.all()
         response = self.serializer_class(productos, many=True)
         return Response(response.data)
+
+
+class CategoriasView(TemplateView):
+    template_name = "categorias.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(CategoriasView, self).get_context_data(**kwargs)
+        context['categorias'] = CatalogoCategoria.objects.all()
+        #context.update(categoria_form=CategoriaForm())
+        return context
