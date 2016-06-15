@@ -38,6 +38,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
             </form>
           </li>
           <li {% block dashboard %}{% endblock dashboard %}><a href="#"><i class="fa fa-home"></i>Dashboard</a></li>
+          <li {% block productos %}{% endblock productos %}><a href="{% url 'productos' %}"><i class="fa fa-cubes"></i>Productos</a></li>
           <li class="sub">
             <a href="javascript:;">
               <i class="fa fa-database"></i> Nested Menu <div class="pull-right"><span class="caret"></span></div>
@@ -50,7 +51,6 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
               <li><a href="#">Facilisi</a></li>
             </ul>
           </li>
-          <li {% block productos %}{% endblock productos %}><a href="{% url 'productos' %}"><i class="fa fa-cubes"></i>Productos</a></li>
           <li><a href="maps.html"><i class="fa fa-map-marker"></i><span class="badge pull-right">42</span>Maps</a></li>
           <li><a href="tables.html"><i class="fa fa-users"></i><span class="badge pull-right">NEW</span>Manage Users</a></li>
           <li><a href="preferences.html"><i class="fa fa-cog"></i>Preferences</a></li>

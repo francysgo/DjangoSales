@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import *
 
 unidades = (
 	("kilogramos","kilogramos"),
@@ -51,7 +52,6 @@ class Producto(models.Model):
 	proveedor = models.ForeignKey(Proveedor)
 	categoria = models.ForeignKey(CatalogoCategoria)
 	unidad = models.ForeignKey(CatalogoUnidades)
-	fecha = models.DateField(auto_now_add=True)
 	is_active = models.BooleanField(default=True)
 
 	class Meta:
@@ -67,6 +67,7 @@ class Inventario(models.Model):
 	cantidad = models.FloatField(default=0)
 	precio_entrada = models.FloatField(default=0)
 	precio_salida = models.FloatField(default=0)
+	fecha = models.DateField(default=date.today)
 
 	def __str__(self):
 		return self.producto
