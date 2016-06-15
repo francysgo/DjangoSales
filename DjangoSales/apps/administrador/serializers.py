@@ -1,7 +1,8 @@
 from django.conf.urls import url, include
-from .models import CatalogoCategoria, Proveedor, Producto, CatalogoUnidades
-from rest_framework import routers, serializers, viewsets
+from .models import CatalogoCategoria, Proveedor, Producto, CatalogoUnidades, Inventario
+from rest_framework import routers, serializers, viewsets, generics
 from rest_framework.response import Response
+from rest_framework import filters
 
 class UnidadSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -14,7 +15,6 @@ class CategoriaSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id','nombre')
 
 class CategoriarViewSet(viewsets.ModelViewSet):
-
 	queryset = CatalogoCategoria.objects.all()
 	serializer_class = CategoriaSerializer
 
@@ -36,7 +36,6 @@ class ProductoSerializer(serializers.HyperlinkedModelSerializer):
 
 # ViewSets define the view behavior.
 class ProductoViewSet(viewsets.ModelViewSet):
-
     queryset = Producto.objects.all()
     serializer_class = ProductoSerializer
 
@@ -53,7 +52,6 @@ class ProductoViewSet(viewsets.ModelViewSet):
         return Response({'producto':entrada.nombre})
 
     def update(self, validated_data, pk):
-
         updated_instance = Producto.objects.get(pk=pk)
         proveedor = Proveedor.objects.get(id=validated_data.POST["proveedor"])
         unidad = CatalogoUnidades.objects.get(id=validated_data.POST["unidad"])
@@ -74,3 +72,16 @@ class ProveedorSerializer(serializers.HyperlinkedModelSerializer):
 class ProveedorViewSet(viewsets.ModelViewSet):
     queryset = Proveedor.objects.all()
     serializer_class = ProveedorSerializer
+
+class InventarioSerializer(serializers.HyperlinkedModelSerializer):
+    producto = ProductoSerializer()
+
+    class Meta:
+        model = Inventario
+        fields = ('id', 'producto', 'cantidad', 'precio_entrada', 'precio_salida')
+
+class InventarioViewSet(viewsets.ModelViewSet):
+    serializer_class = InventarioSerializer
+    queryset = Inventario.objects.all()
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('producto__upc',)

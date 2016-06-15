@@ -52,11 +52,6 @@ class ProveedoresView(TemplateView):
 		context.update(proveedor_form=ProveedorForm())
 		return context
 
-class ProdcutosApiView(APIView):
-
-    serializer_class = ProductoSerializer
-
-    def get(self, request, id=None, format=None):
-        productos = Producto.objects.all()
-        response = self.serializer_class(productos, many=True)
-        return Response(response.data)
+class InventarioView(TemplateView):
+    
+    template_name = "inventario.html"

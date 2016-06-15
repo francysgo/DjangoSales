@@ -39,16 +39,15 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
           </li>
           <li {% block dashboard %}{% endblock dashboard %}><a href="#"><i class="fa fa-home"></i>Dashboard</a></li>
           <li {% block productos %}{% endblock productos %}><a href="{% url 'productos' %}"><i class="fa fa-cubes"></i>Productos</a></li>
+          <li {% block inventario %}{% endblock inventario %}><a href="{% url 'inventario' %}"><i class="fa fa-list-alt" aria-hidden="true"></i>Inventario</a></li>
           <li class="sub">
             <a href="javascript:;">
-              <i class="fa fa-database"></i> Nested Menu <div class="pull-right"><span class="caret"></span></div>
+              <i class="fa fa-database"></i> Catálogos <div class="pull-right"><span class="caret"></span></div>
             </a>
             <ul class="templatemo-submenu">
-              <li><a href="#">Aenean</a></li>
-              <li><a href="#">Pellentesque</a></li>
-              <li><a href="#">Congue</a></li>             
-              <li><a href="#">Interdum</a></li>
-              <li><a href="#">Facilisi</a></li>
+              <li><a href="#">Proveedores</a></li>
+              <li><a href="#">Unidades</a></li>
+              <li><a href="#">Categorias</a></li>             
             </ul>
           </li>
           <li><a href="maps.html"><i class="fa fa-map-marker"></i><span class="badge pull-right">42</span>Maps</a></li>
