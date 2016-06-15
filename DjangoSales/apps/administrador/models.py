@@ -67,7 +67,7 @@ class Inventario(models.Model):
 	cantidad = models.FloatField(default=0)
 	precio_entrada = models.FloatField(default=0)
 	precio_salida = models.FloatField(default=0)
-	fecha = models.DateField(default=date.today)
+	fecha = models.DateField(default=date.today, null=True)
 
 	def __str__(self):
 		return self.producto

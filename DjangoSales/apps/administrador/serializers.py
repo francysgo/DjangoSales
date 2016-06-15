@@ -3,6 +3,10 @@ from .models import CatalogoCategoria, Proveedor, Producto, CatalogoUnidades
 from rest_framework import routers, serializers, viewsets
 from rest_framework.response import Response
 
+class UnidadSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = CatalogoUnidades
+        fields = ('id','nombre')
 
 class CategoriaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -14,14 +18,17 @@ class CategoriarViewSet(viewsets.ModelViewSet):
 	queryset = CatalogoCategoria.objects.all()
 	serializer_class = CategoriaSerializer
 
-
+class ProveedorProductosSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Proveedor
+        fields = ('id','nombre')
 
 # Serializers define the API representation.
 class ProductoSerializer(serializers.HyperlinkedModelSerializer):
-
-    categoria = serializers.PrimaryKeyRelatedField(source='categoria.nombre', queryset=CatalogoCategoria.objects.all())
-    unidad = serializers.PrimaryKeyRelatedField(source='unidad.nombre', queryset=CatalogoUnidades.objects.all())
-    proveedor = serializers.PrimaryKeyRelatedField(source='proveedor.nombre', queryset=Proveedor.objects.all())
+    #serializers.PrimaryKeyRelatedField(source='proveedor.nombre', queryset=Proveedor.objects.all())
+    categoria = CategoriaSerializer()
+    unidad = UnidadSerializer()
+    proveedor = ProveedorProductosSerializer()
 
     class Meta:
         model = Producto

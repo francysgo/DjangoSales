@@ -65,20 +65,13 @@ SalesApp.controller('productosController', function($scope, $http, productoServi
 	        });
 		;
 	}
-	$scope.detalleProducto = function(id){
-		var url = '/api/productos/'+ id.currentTarget.attributes.id.nodeValue;
-		$http.get(url)
-	        .success(function(data) {
-	            $('#id_upc').val(data.upc);
-				$('#id_nombre').val(data.nombre);
-				$('#id_proveedor').val(data.proveedor).change();
-				$('#id_categoria').val(data.categoria);
-				$('#id_unidad').val(data.unidad);
-				$('#editar_producto').modal('show');
-	        })
-	        .error(function(data) {
-	            console.log('Error: ' + data);
-	        });
+	$scope.detalleProducto = function(item){
+        $('#id_upc').val(item.upc);
+		$('#id_nombre').val(item.nombre);
+		$('#id_proveedor').val(item.proveedor.id).change();
+		$('#id_categoria').val(item.categoria.id).change();
+		$('#id_unidad').val(item.unidad.id).change();
+		$('#editar_producto').modal('show');
 	}
 
 });

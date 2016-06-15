@@ -38,12 +38,12 @@
             <tbody>
                 <tr dir-paginate="x in productos|orderBy:sortKey:reverse|filter:search|itemsPerPage:10">
                     <td>[[ x.upc ]]</td>
-                    <td>[[ x.proveedor ]]</td>
+                    <td>[[ x.proveedor.nombre ]]</td>
                     <td>[[ x.nombre ]]</td>
-                    <td>[[ x.unidad ]]</td>
+                    <td>[[ x.unidad.nombre ]]</td>
 
                     <td class="text-center">
-                        <a href="#" id="[[ x.id ]]" style="font-size:22px; color:#f0ad4e;" ng-click="detalleProducto($event)"><i class="fa fa-edit"></i></a>
+                        <a href="#" id="[[ x.id ]]" style="font-size:22px; color:#f0ad4e;" ng-click="detalleProducto(x)"><i class="fa fa-edit"></i></a>
                         <a href="#" data-id="[[ x.id ]]" style="font-size:22px; color:#d9534f; padding-left:10px;" data-producto="[[ x.nombre ]]"  ng-click="datosEliminar(x,$index)"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
