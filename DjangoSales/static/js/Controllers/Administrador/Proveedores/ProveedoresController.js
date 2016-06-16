@@ -54,8 +54,8 @@ $scope.Editproveedor=function(){
   $http.put('/api/proveedores/'+Proveedor.id+'/',JSON.stringify(Proveedor)).success(function(data) {
     $('#Modalproveedor').modal('hide');
     obtenerLista();
-    $.notify({icon: 'ti-thumb-up',message: "El proveedor se ha editado correctamente"},{ type: 'success',timer: 4000});
-       });
+    
+         });
 }
 
 $scope.Addproveedor=function(){
@@ -69,7 +69,7 @@ $scope.Addproveedor=function(){
   $http.post('/api/proveedores/',Proveedor).success(function(data) {
     $('#Modalproveedor').modal('hide');
     obtenerLista();
-    $.notify({icon: 'ti-thumb-up',message: "El proveedor se ha agregado correctamente"},{ type: 'success',timer: 4000});
+   
        });
 
 }
