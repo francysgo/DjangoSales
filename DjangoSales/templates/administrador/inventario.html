@@ -4,65 +4,7 @@
 {% block inventario %}class="active"{% endblock inventario %}
 {% block navbar %}Inventario{% endblock navbar %}
 {% block contenido %}
-<div class="card" ng-controller="inventarioController">
-    <div class="header">
-        <h4 class="title">Inventario</h4>
-        <p class="category">Aquí se muestran todos los productos en el inventario</p>
-    </div><br />
-    <p style="padding-left:10px;" class="text-left">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#actualizar_inventario"><i class="fa fa-refresh" aria-hidden="true"></i>Actualizar</button>
-    </p>
-    <div class="content table-responsive table-full-width">
-        <form class="form-inline">
-            <div class="form-group" style="padding-left:10px;">
-                <label >Busqueda</label>
-                <input type="text" ng-model="search" class="form-control" placeholder="Search">
-            </div>
-        </form>
-        <table class="table table-striped" id="example">
-            <thead>
-                <th ng-click="sort('producto.upc')">UPC
-                    <span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-                </th>
-                <th ng-click="sort('producto.proveedor.nombre')">Proveedor
-                    <span class="glyphicon sort-icon" ng-show="sortKey=='proveedor'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-                </th>
-                <th ng-click="sort('producto.nombre')">Nombre
-                    <span class="glyphicon sort-icon" ng-show="sortKey=='nombre'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-                </th>
-                <th ng-click="sort('producto.unidad.nombre')">Unidad
-                    <span class="glyphicon sort-icon" ng-show="sortKey=='unidad'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-                </th>
-                <th ng-click="sort('cantidad')">Cantidad
-                    <span class="glyphicon sort-icon" ng-show="sortKey=='unidad'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-                </th>
-                <th ng-click="sort('precio_salida')">Precio
-                    <span class="glyphicon sort-icon" ng-show="sortKey=='unidad'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-                </th>
-                <th class="text-center">ACCIONES</th>
-            </tr></thead>
-            <tbody>
-                <tr dir-paginate="x in productos|orderBy:sortKey:reverse|filter:search|itemsPerPage:10">
-                    <td>[[ x.producto.upc ]]</td>
-                    <td>[[ x.producto.proveedor.nombre ]]</td>
-                    <td>[[ x.producto.nombre ]]</td>
-                    <td>[[ x.producto.unidad.nombre ]]</td>
-                    <td>[[ x.cantidad | number:1 ]]</td>
-                    <td>[[ x.precio_salida | currency ]]</td>
-                    <td class="text-center">
-                        <a href="#" id="[[ x.id ]]" style="font-size:22px; color:#f0ad4e;" ng-click="detalleProducto(x)"><i class="fa fa-edit"></i></a>
-                        <a href="#" data-id="[[ x.id ]]" style="font-size:22px; color:#d9534f; padding-left:10px;" data-producto="[[ x.nombre ]]"  ng-click="datosEliminar(x,$index)"><i class="fa fa-trash"></i></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <dir-pagination-controls
-            max-size="5"
-            direction-links="true"
-            boundary-links="true" >
-        </dir-pagination-controls>
-    </div>
-</div>
+<div ng-view></div>
 {% endblock contenido %}
 
 {% block modales %}

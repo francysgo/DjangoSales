@@ -84,3 +84,17 @@ SalesApp.controller('inventarioController', function($scope, $http, productoServ
 	}
 
 });
+
+	SalesApp.config(function($routeProvider){
+		 $routeProvider.when("/", {
+		 templateUrl : "/static/js/Controllers/Administrador/Inventario/templates/all_entries.html",
+		 controller : "inventarioController"
+		 })
+		 .when("/actualizar", {
+		 templateUrl : "/static/js/Controllers/Administrador/Inventario/templates/actualizar.html",
+		 controller : "inventarioController"
+		 })
+		 //este es digamos, al igual que en un switch el default, en caso que 
+		 //no hayamos concretado que nos redirija a la página principal
+		 .otherwise({ reditrectTo : "/" });
+	});
