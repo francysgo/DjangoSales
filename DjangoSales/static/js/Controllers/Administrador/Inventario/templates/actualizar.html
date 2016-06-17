@@ -1,3 +1,30 @@
- <p style="padding-left:10px;" class="text-left">
-        <a href="#/" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i>Regresar</a>
-    </p>
+<div ng-controller="inventarioAddController">
+	<h3 style="padding-left:10px;" class="text-left">
+        <a href="#/"><i class="fa fa-caret-left" aria-hidden="true"></i> Regresar</a>
+	</h3></br>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="form-group">
+			    <label class="sr-only" for="exampleInputAmount">UPC</label>
+			    <div class="input-group">
+			      <div class="input-group-addon"><i class="fa fa-barcode" aria-hidden="true"></i></div>
+			      <input type="text" class="form-control"  ng-model="upc_actualizar" ng-keypress="addProducto()"placeholder="UPC" autofocus autocomplete="off">
+			    </div>
+			</div>
+		</div>
+	</div>
+	<table class="table">
+		<thead>
+			<th>UPC</th>
+			<th>Producto</th>
+			<th>Cantidad</th>
+		</thead>
+		<tbody>
+			<tr >
+		      <td>{{x.producto.upc}}</td>
+		      <td>{{x.producto.nombre}}</td>
+		      <td><input type="number"></td>
+		    </tr>
+		</tbody>
+	</table>
+</div>

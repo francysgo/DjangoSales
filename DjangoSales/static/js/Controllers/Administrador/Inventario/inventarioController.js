@@ -92,7 +92,7 @@ SalesApp.controller('inventarioController', function($scope, $http, productoServ
 		 })
 		 .when("/actualizar", {
 		 templateUrl : "/static/js/Controllers/Administrador/Inventario/templates/actualizar.html",
-		 controller : "inventarioController"
+		 controller : "inventarioAddController"
 		 })
 		 //este es digamos, al igual que en un switch el default, en caso que 
 		 //no hayamos concretado que nos redirija a la página principal
