@@ -8,22 +8,22 @@
 			    <label class="sr-only" for="exampleInputAmount">UPC</label>
 			    <div class="input-group">
 			      <div class="input-group-addon"><i class="fa fa-barcode" aria-hidden="true"></i></div>
-			      <input type="text" class="form-control"  ng-model="upc_actualizar" ng-keypress="addProducto()"placeholder="UPC" autofocus autocomplete="off">
+			      <input type="text" class="form-control" id="actual_upc"  ng-model="upc_actualizar" ng-keypress="addProducto()"placeholder="UPC" autofocus autocomplete="off">
 			    </div>
 			</div>
 		</div>
 	</div>
-	<table class="table">
+	<table class="table table-striped"">
 		<thead>
 			<th>UPC</th>
 			<th>Producto</th>
 			<th>Cantidad</th>
 		</thead>
 		<tbody>
-			<tr >
-		      <td>{{x.producto.upc}}</td>
-		      <td>{{x.producto.nombre}}</td>
-		      <td><input type="number"></td>
+			<tr ng-repeat="x in productos_actualizar">
+		      <td>[[ x.upc ]]</td>
+		      <td>[[ x.nombre ]]</td>
+		      <td><input type="number" step="any" style="width: 50px;"" name="Cantidad" value="1" min="0"/></td>
 		    </tr>
 		</tbody>
 	</table>
