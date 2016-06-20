@@ -9,7 +9,8 @@ from .models import(
 	Proveedor,
 	Producto,
 	Inventario,
-    CatalogoCategoria
+    CatalogoCategoria,
+    CatalogoUnidades
 	)
 
 class RedirectView(TemplateView):
@@ -70,4 +71,12 @@ class CategoriasView(TemplateView):
         context = super(CategoriasView, self).get_context_data(**kwargs)
         context['categorias'] = CatalogoCategoria.objects.all()
         #context.update(categoria_form=CategoriaForm())
+        return context
+
+class UnidadesView(TemplateView):
+    template_name="unidades.html"
+
+    def get_context_data(self,**kwargs):
+        context=super(UnidadesView,self).get_context_data(**kwargs)
+        context['unidades']=CatalogoUnidades.objects.all()
         return context
