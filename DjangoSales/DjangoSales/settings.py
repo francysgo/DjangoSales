@@ -15,6 +15,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'users.User'
 
 # Application definition
 
@@ -28,6 +29,9 @@ INSTALLED_APPS = [
     'apps.users',
     'apps.home',
     'apps.administrador',
+    'djng', 
+    'rest_framework',
+
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -47,9 +51,15 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
+
             os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'templates/administrador'),
-            os.path.join(BASE_DIR, 'templates/home')],
+            os.path.join(BASE_DIR, 'templates/home'),
+            os.path.join(BASE_DIR, 'templates/users'),
+            os.path.join(BASE_DIR, 'templates/administrador'),
+            os.path.join(BASE_DIR, 'templates/home')
+            ],
+
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -116,3 +126,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
     )
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
+}

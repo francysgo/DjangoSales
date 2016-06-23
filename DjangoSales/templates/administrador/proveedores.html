@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block titulo %}Proveedores{% endblock titulo %}
+{% block entradas %}class="active"{% endblock entradas %}
+{% block contenido %}
+
+<div class="container-fluid" ng-controller="proveedoresController">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                  <div class="col-md-5">
+                    <h4 class="title">Proveedores</h4>
+                    <p class="category">Lista de proveedores</p>
+                  </div>
+                      <div class="col-md-5">
+
+                      </div>
+
+                    </div>
+
+                    <div class="content table-responsive table-full-width">
+                        <form class="form-inline">
+                            <div class="form-group" style="padding-left:10px;">
+                                <label >Busqueda</label>
+                                <input type="text" ng-model="search" class="form-control border-input" placeholder="Search">
+                            </div>
+                            <button type="button"  class="btn btn-success btn-fill btn-wd"  ng-click="Agregaproveedor()"><i class="ti-plus"></i> Agregar nuevo</button>
+                        </form>
+
+                        <table class="table table-striped" id="example">
+                            <thead>
+                                <th ng-click="sort('upc')">Id
+                                    <span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+                                <th ng-click="sort('proveedor')">Nombre
+                                    <span class="glyphicon sort-icon" ng-show="sortKey=='proveedor'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+                                <th ng-click="sort('nombre')">telefono
+                                    <span class="glyphicon sort-icon" ng-show="sortKey=='nombre'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+                                <th ng-click="sort('fecha')">correo
+                                    <span class="glyphicon sort-icon" ng-show="sortKey=='fecha'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+                                <th class="text-center">ACCIONES</th>
+                            </tr></thead>
+                            <tbody>
+                                <tr dir-paginate="x in proveedores|orderBy:sortKey:reverse|filter:search|itemsPerPage:10">
+                                    <td>[[ x.id ]]</td>
+                                    <td>[[ x.nombre ]]</td>
+                                    <td>[[ x.telefono ]]</td>
+                                    <td>[[ x.correo ]]</td>
+
+                                    <td class="text-center">
+                                        <a href="#fakelink" style="font-size:22px; color:#f0ad4e;" ng-click=EditarProveedor(x)><i class="fa fa-edit"></i></a>
+                                        <a data-id="[[ x.id ]]" style="font-size:22px; color:#d9534f; padding-left:10px;" data-producto="[[ x.nombre ]]"  ng-click="datosEliminar(x,$index)"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <dir-pagination-controls
+                            max-size="5"
+                            direction-links="true"
+                            boundary-links="true" >
+                        </dir-pagination-controls>
+                    </div>
+
+          </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+{% endblock contenido %}
+{% block modales %}
+<div class="modal fade" id="Modalproveedor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content" ng-controller="EditproveedoresController">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title"  ng-bind-html="content"></h4>
+      </div>
+      <div class="modal-body">
+      <div class="form-group">
+        <label>Nombre distribuidor</label>
+<input type="hidden" class="form-control border-input" placeholder="nombre" ng-model="id">
+<input type="text" class="form-control border-input" placeholder="nombre" ng-model="proveedor">
+      </div>
+      <div class="form-group">
+        <label>Dirección</label>
+<input type="text" class="form-control border-input" placeholder="direccion" ng-model="direccion">
+      </div>
+      <div class="row">
+     <div class="col-sm-5">
+       <div class="form-group">
+         <label>Telefono</label>
+ <input type="text" class="form-control border-input" placeholder="telefono" ng-model="telefono">
+       </div>
+     </div>
+     <div class="col-sm-5">
+       <div class="form-group">
+         <label>Correo</label>
+ <input type="text" class="form-control border-input" placeholder="correo" ng-model="correo">
+       </div>
+     </div>
+
+      </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <div class="divider"></div>
+        <form>
+           <p>
+
+            <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-info btn-fill btn-wd"  ng-click="Addproveedor()"><i class="ti-check"></i> Guardar</button>
+            <button type="submit" class="btn btn-info btn-fill btn-wd" ng-click="Editproveedor()">Editar</button>
+        </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock modales %}
+{% block js %}
+{% endblock js %}
