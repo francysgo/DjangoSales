@@ -32,13 +32,14 @@ class ProductoSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Producto
-        fields = ('id', 'upc', 'proveedor', 'nombre', 'categoria', 'unidad')
+        fields = ('id', 'upc', 'proveedor', 'nombre', 'categoria', 'unidad','precio_entrada','precio_salida')
 
 # ViewSets define the view behavior.
 class ProductoViewSet(viewsets.ModelViewSet):
     queryset = Producto.objects.all()
     serializer_class = ProductoSerializer
-
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('upc',)
 
     def create(self, request, *args, **kwargs):
         proveedor = Proveedor.objects.get(id=request.data['proveedor'])
@@ -48,21 +49,25 @@ class ProductoViewSet(viewsets.ModelViewSet):
             upc=request.data['upc'],
             unidad=unidad,
             categoria=categoria,
-            proveedor=proveedor)
+            proveedor=proveedor,
+            precio_entrada=request.data['precio_entrada'],
+            precio_salida=request.data['precio_salida'])
         return Response({'producto':entrada.nombre})
 
-    def update(self, validated_data, pk):
-        updated_instance = Producto.objects.get(pk=pk)
-        proveedor = Proveedor.objects.get(id=validated_data.POST["proveedor"])
-        unidad = CatalogoUnidades.objects.get(id=validated_data.POST["unidad"])
-        categoria = CatalogoCategoria.objects.get(id=validated_data.POST["categoria"])
-        updated_instance.upc=validated_data.POST['upc']
-        updated_instance.nombre=validated_data.POST['nombre']
+    def update(self, request, *args, **kwargs):
+        updated_instance = Producto.objects.get(pk=request.data["id"])
+        proveedor = Proveedor.objects.get(id=request.data["proveedor"])
+        unidad = CatalogoUnidades.objects.get(id=request.data["unidad"])
+        categoria = CatalogoCategoria.objects.get(id=request.data["categoria"])
+        updated_instance.upc=request.data['upc']
+        updated_instance.nombre=request.data['nombre']
         updated_instance.unidad=unidad
         updated_instance.categoria=categoria
         updated_instance.proveedor=proveedor
+        updated_instance.precio_entrada=request.data['precio_entrada']
+        updated_instance.precio_salida=request.data['precio_salida']
         updated_instance.save()
-        return updated_instance
+        return Response({'producto':updated_instance.nombre})
 
 class ProveedorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

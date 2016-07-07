@@ -29,4 +29,4 @@ class ProductoForm(NgFormValidationMixin ,  NgModelForm):
 
     class Meta:
         model = Producto
-        fields = ('upc', 'proveedor','nombre','categoria', 'unidad')
+        fields = ('upc', 'proveedor','nombre','categoria', 'unidad','precio_entrada', 'precio_salida')

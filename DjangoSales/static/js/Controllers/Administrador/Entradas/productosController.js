@@ -55,7 +55,8 @@ SalesApp.controller('productosController', function($scope, $http, productoServi
 		data.proveedor = parseInt($scope.proveedor);
 		data.categoria = parseInt($scope.categoria);
 		data.unidad = parseInt($scope.unidad);
-
+		data.precio_entrada = parseFloat($scope.precio_entrada);
+		data.precio_salida = parseFloat($scope.precio_salida);
 		console.log(data);
 		$http.post('/api/productos/',data).success(function(data){
 			location.reload();
@@ -63,15 +64,39 @@ SalesApp.controller('productosController', function($scope, $http, productoServi
 		.error(function(data) {
 	            console.log('Error: ' + data);
 	        });
-		;
 	}
 	$scope.detalleProducto = function(item){
+		$scope.pk = item.id;
         $('#id_upc').val(item.upc);
 		$('#id_nombre').val(item.nombre);
 		$('#id_proveedor').val(item.proveedor.id).change();
 		$('#id_categoria').val(item.categoria.id).change();
 		$('#id_unidad').val(item.unidad.id).change();
+		$('#id_precio_entrada').val(item.precio_entrada);
+		$('#id_precio_salida').val(item.precio_salida);
+		$scope.upc = item.upc;
+		$scope.nombre = item.nombre;
+		$scope.precio_entrada = item.precio_entrada;
+		$scope.precio_salida = item.precio_salida;
 		$('#editar_producto').modal('show');
 	}
-
+	$scope.editProducto = function(){
+        var data = {};
+        data.id = $scope.pk;
+        data.upc = $scope.upc;
+		data.nombre = $scope.nombre;
+		data.proveedor = $('#id_proveedor').val();
+		data.categoria = $('#id_categoria').val();
+		data.unidad = $('#id_unidad').val();
+		data.precio_entrada = parseFloat($scope.precio_entrada);
+		data.precio_salida = parseFloat($scope.precio_salida);
+		console.log(data);
+		var url = '/api/productos/'+data.id+'/';
+		$http.put(url,data).success(function(data){
+			location.reload();
+		})
+		.error(function(data) {
+	            console.log('Error: ' + data);
+	        });
+    }
 });
