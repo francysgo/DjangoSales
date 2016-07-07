@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
 from .views import (
-	IndexView,ProductoView,RedirectView,ProveedoresView,CategoriasView,UnidadesView
+	IndexView,ProductoView,RedirectView,ProveedoresView,CategoriasView,UnidadesView,VentaView
 	)
 
 urlpatterns = [
@@ -10,4 +10,5 @@ urlpatterns = [
    url(r'^administrador/proveedores/$', ProveedoresView.as_view(), name='proveedores'),
    url(r'^administrador/categorias/$', CategoriasView.as_view(), name='categorias'),
    url(r'^administrador/unidades/$', UnidadesView.as_view(), name='unidades'),
+   url(r'^administrador/venta/$', VentaView.as_view(), name='venta'),
 ]

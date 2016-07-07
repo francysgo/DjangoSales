@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block titulo %}Unidades{% endblock titulo %}
+{% block entradas %}class="active"{% endblock entradas %}
+{% block contenido %}
+
+<div class="container-fluid" ng-controller="VentaController">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                  <div class="col-md-5">
+                    <h4 class="title">venta</h4>
+                    <p class="category">Lista de unidades</p>
+                  </div>
+                      <div class="col-md-5">
+
+                      </div>
+
+                </div>
+
+
+          </div>
+        </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-8">
+            <input type="text" placeholder="Ingrese una clave de producto" class="form-control" my-enter="Agrega()">
+          </div>
+          <div class="col-md-4">
+            
+            precios
+          </div>
+
+
+        </div>
+
+
+           
+
+
+
+
+          </div>
+
+
+
+
+{% endblock contenido %}
+{% block modales %}
+
+
+{% endblock modales %}
+{% block js %}
+{% endblock js %}

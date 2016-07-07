@@ -80,3 +80,11 @@ class UnidadesView(TemplateView):
         context=super(UnidadesView,self).get_context_data(**kwargs)
         context['unidades']=CatalogoUnidades.objects.all()
         return context
+
+class VentaView(TemplateView):
+    template_name="venta.html"
+
+    def get_context_data(self,**kwargs):
+        context=super(VentaView,self).get_context_data(**kwargs)
+        return context
+
