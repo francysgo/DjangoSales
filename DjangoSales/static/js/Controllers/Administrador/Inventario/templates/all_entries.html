@@ -42,7 +42,7 @@
                     <td>[[ x.producto.nombre ]]</td>
                     <td>[[ x.producto.unidad.nombre ]]</td>
                     <td>[[ x.cantidad | number:1 ]]</td>
-                    <td>[[ x.precio_salida | currency ]]</td>
+                    <td>[[ x.producto.precio_salida | currency ]]</td>
                     <td class="text-center">
                         <a id="[[ x.id ]]" style="font-size:22px; color:#f0ad4e;" ng-click="detalleProducto(x)"><i class="fa fa-edit"></i></a>
                         <a data-id="[[ x.id ]]" style="font-size:22px; color:#d9534f; padding-left:10px;" data-producto="[[ x.nombre ]]"  ng-click="datosEliminar(x,$index)"><i class="fa fa-trash"></i></a>

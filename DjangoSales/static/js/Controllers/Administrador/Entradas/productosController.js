@@ -61,8 +61,8 @@ SalesApp.controller('productosController', function($scope, $http, productoServi
 		$http.post('/api/productos/',data).success(function(data){
 			location.reload();
 		})
-		.error(function(data) {
-	            console.log('Error: ' + data);
+		.error(function(data, status, header, config) {
+	            sweetAlert("Error...", "El código de barras ya existe!", "error");
 	        });
 	}
 	$scope.detalleProducto = function(item){
@@ -96,7 +96,7 @@ SalesApp.controller('productosController', function($scope, $http, productoServi
 			location.reload();
 		})
 		.error(function(data) {
-	            console.log('Error: ' + data);
+	            sweetAlert("Error...", "El código de barras ya existe!", "error");
 	        });
     }
 });

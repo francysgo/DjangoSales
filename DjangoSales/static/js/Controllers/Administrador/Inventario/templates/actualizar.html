@@ -8,12 +8,12 @@
 			    <label class="sr-only" for="exampleInputAmount">UPC</label>
 			    <div class="input-group">
 			      <div class="input-group-addon"><i class="fa fa-barcode" aria-hidden="true"></i></div>
-			      <input type="text" class="form-control" id="actual_upc"  ng-model="upc_actualizar" ng-keypress="addProducto()"placeholder="UPC" autofocus autocomplete="off">
+			      <input type="text" class="form-control" id="actual_upc"  ng-model="upc_actualizar" ng-keypress="addProducto()" placeholder="UPC" autofocus autocomplete="off">
 			    </div>
 			</div>
 		</div>
 	</div>
-	<table class="table table-striped"">
+	<table class="table table-striped">
 		<thead>
 			<th class="text-center">UPC</th>
 			<th class="text-center">Producto</th>
@@ -26,12 +26,12 @@
 		      <td class="text-center">[[ x.upc ]]</td>
 		      <td class="text-center">[[ x.nombre ]]</td>
 		      <td class="text-center">[[ x.cantidad ]]</td>
-		      <td class="text-center"><input type="number" step="any" style="width: 50px;"" name="Cantidad" value="1" min="0"/></td>
+		      <td class="text-center"><input type="number" ng-model="CantidadValue[$index]" step="any" style="width: 50px;" name="Cantidad" value="1" min="0"/></td>
 		      <td class="text-center"><a style="font-size:22px; color:#d9534f; padding-left:10px;" ng-click="deleteProducto(x)"><i class="fa fa-trash"></i></a></td>
 		    </tr>
 		</tbody>
 	</table>
 	<p style="padding-left:20px;">
-		<button class="btn btn-success btn-lg" ng-show='mostrarBoton.show'>Guardar</button>
+		<button class="btn btn-success btn-lg" ng-show='mostrarBoton.show' ng-click="ActualizarProductos()">Guardar</button>
 	</p>
 </div>

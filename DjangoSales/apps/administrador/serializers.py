@@ -52,6 +52,10 @@ class ProductoViewSet(viewsets.ModelViewSet):
             proveedor=proveedor,
             precio_entrada=request.data['precio_entrada'],
             precio_salida=request.data['precio_salida'])
+        inv = Inventario()
+        inv.producto = entrada
+        inv.cantidad = 0
+        inv.save()
         return Response({'producto':entrada.nombre})
 
     def update(self, request, *args, **kwargs):
@@ -83,10 +87,20 @@ class InventarioSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Inventario
-        fields = ('id', 'producto', 'cantidad', 'precio_entrada', 'precio_salida')
+        fields = ('id', 'producto', 'cantidad')
 
 class InventarioViewSet(viewsets.ModelViewSet):
     serializer_class = InventarioSerializer
     queryset = Inventario.objects.all()
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ('producto__upc',)
+
+    def update(self, request, *args, **kwargs):
+        print(request.data['id'])
+        updated_instance = Inventario.objects.get(pk=request.data['id'])
+        if(request.data['update'] == True):
+            updated_instance.cantidad = float(updated_instance.cantidad) + float(request.data['cantidad'])
+        else:
+             updated_instance.cantidad = updated_instance.cantidad
+        updated_instance.save()
+        return Response({'producto':updated_instance.producto.nombre})
