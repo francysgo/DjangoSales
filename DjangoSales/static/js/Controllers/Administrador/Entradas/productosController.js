@@ -36,10 +36,10 @@ SalesApp.controller('productosController', function($scope, $http, productoServi
   		$http.delete(url)
 	    .success(function(data) {
 	    		$('#eliminar_producto').modal('hide');
-	            location.reload();
+	            swal({   title: "Producto Eliminado!",   text: "El producto ha sido eliminado correctamente!",   type: "success",  confirmButtonColor: "#449d44",   confirmButtonText: "Aceptar!"}, function(){   location.reload(); });
 	    })
 	    .error(function(data) {
-	             console.log('Error: ' + data);
+	             sweetAlert("Error...", "Error al eliminar el producto!", "error");
 	    });
   	}
 
@@ -47,6 +47,16 @@ SalesApp.controller('productosController', function($scope, $http, productoServi
    $scope.sort = function(keyname){
 		$scope.sortKey = keyname;   //set the sortKey to the param passed
 		$scope.reverse = !$scope.reverse; //if true make it false and vice versa
+	}
+	$scope.modalNuevo = function(){
+		$scope.upc = "";
+		$scope.nombre = "";
+		$scope.proveedor = "";
+		$scope.categoria = "";
+		$scope.unidad = "";
+		$scope.precio_entrada = "";
+		$scope.precio_salida = "";
+		$('#agregar_producto').modal('show');
 	}
 	$scope.addProducto = function(){
   		var data = {};
@@ -59,7 +69,8 @@ SalesApp.controller('productosController', function($scope, $http, productoServi
 		data.precio_salida = parseFloat($scope.precio_salida);
 		console.log(data);
 		$http.post('/api/productos/',data).success(function(data){
-			location.reload();
+			$('#agregar_producto').modal('hide');
+	        swal({   title: "Producto Agregado!",   text: "El producto ha sido agregado correctamente!",   type: "success",  confirmButtonColor: "#449d44",   confirmButtonText: "Aceptar!"}, function(){   location.reload(); });
 		})
 		.error(function(data, status, header, config) {
 	            sweetAlert("Error...", "El código de barras ya existe!", "error");
@@ -93,7 +104,8 @@ SalesApp.controller('productosController', function($scope, $http, productoServi
 		console.log(data);
 		var url = '/api/productos/'+data.id+'/';
 		$http.put(url,data).success(function(data){
-			location.reload();
+			$('#editar_producto').modal('hide');
+	        swal({   title: "Producto Editado!",   text: "El producto ha sido editado correctamente!",   type: "success",  confirmButtonColor: "#449d44",   confirmButtonText: "Aceptar!"}, function(){   location.reload(); });
 		})
 		.error(function(data) {
 	            sweetAlert("Error...", "El código de barras ya existe!", "error");

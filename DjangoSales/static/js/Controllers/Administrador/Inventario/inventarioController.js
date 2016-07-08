@@ -1,4 +1,4 @@
-SalesApp.controller('inventarioController', function($scope, $http, productoService) {
+SalesApp.controller('inventarioController', function($scope, $http) {
 
     $http.get('/api/inventario.json')
 	        .success(function(data) {
@@ -8,70 +8,22 @@ SalesApp.controller('inventarioController', function($scope, $http, productoServ
 	            console.log('Error: ' + data);
 	        });
 
-    $scope.datosEliminar = function(item,index){
-    	productoService.text_eliminar = item.nombre;
-    	productoService.id_eliminar = item.id;
-    	productoService.index = index;
-    	productoService.obj = item;
-    	$('#eliminar_producto').modal('show');
-    }
-
-    $scope.getText = function() {
-    	return productoService.text_eliminar;
-  	}
-  	$scope.getId = function() {
-    	return productoService.id_eliminar;
-  	}
-
-  	$scope.eliminarProducto = function(){
-  		url = '/api/productos/' + productoService.id_eliminar;
-
-  		$http.delete(url)
-	    .success(function(data) {
-	    		$('#eliminar_producto').modal('hide');
-	            location.reload();
-	    })
-	    .error(function(data) {
-	             console.log('Error: ' + data);
-	    });
-  	}
-
-
    $scope.sort = function(keyname){
 		$scope.sortKey = keyname;   //set the sortKey to the param passed
 		$scope.reverse = !$scope.reverse; //if true make it false and vice versa
 	}
-	$scope.addProducto = function(){
-  		var data = {};
-		data.upc = $scope.upc;
-		data.nombre = $scope.nombre;
-		data.proveedor = parseInt($scope.proveedor);
-		data.categoria = parseInt($scope.categoria);
-		data.unidad = parseInt($scope.unidad);
 
-		console.log(data);
-		$http.post('/api/productos/',data).success(function(data){
-			location.reload();
-		})
-		.error(function(data) {
-	            console.log('Error: ' + data);
-	        });
-		;
-	}
-	$scope.detalleProducto = function(item){
-        $('#id_upc').val(item.upc);
-		$('#id_nombre').val(item.nombre);
-		$('#id_proveedor').val(item.proveedor.id).change();
-		$('#id_categoria').val(item.categoria.id).change();
-		$('#id_unidad').val(item.unidad.id).change();
-		$('#editar_producto').modal('show');
+	$scope.detalleInventario = function(item){
+        $scope.cantidad = item.cantidad;
+        $scope.id = item.id;
+        $scope.upc = item.producto.upc;
+        $scope.nombre = item.producto.nombre;
+		$('#editar_inventario').modal('show');
 	}
 
 
 	$scope.getInventario = function(){
-		
 		url = '/api/inventario.json?producto__upc=' + $scope.upc_actualizar;
-
   		$http.get(url)
 	    .success(function(data) {
     		$('#nombre_actualizar').val(data[0].producto.nombre);
@@ -82,6 +34,21 @@ SalesApp.controller('inventarioController', function($scope, $http, productoServ
 	             console.log('Error: ' + data);
 	    });
 	}
+
+	$scope.editInventario = function(){
+		$('#editar_inventario').modal('hide');
+		var url = '/api/inventario/'+$scope.id+'/';
+		data = {};
+		data.cantidad = $scope.cantidad;
+		data.id = $scope.id
+		data.update = false;
+		$http.put(url,data).success(function(data){
+			swal({   title: "Producto Actualizado!",   text: "El producto ha sido actualizado correctamente!",   type: "success",  confirmButtonColor: "#449d44",   confirmButtonText: "Aceptar!"}, function(){   location.reload(); });
+		})
+		.error(function(data) {
+			sweetAlert("Error...", "Error al actualizar el producto!", "error");
+	    });
+}
 
 });
 

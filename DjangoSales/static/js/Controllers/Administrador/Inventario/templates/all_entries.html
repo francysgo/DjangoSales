@@ -44,8 +44,7 @@
                     <td>[[ x.cantidad | number:1 ]]</td>
                     <td>[[ x.producto.precio_salida | currency ]]</td>
                     <td class="text-center">
-                        <a id="[[ x.id ]]" style="font-size:22px; color:#f0ad4e;" ng-click="detalleProducto(x)"><i class="fa fa-edit"></i></a>
-                        <a data-id="[[ x.id ]]" style="font-size:22px; color:#d9534f; padding-left:10px;" data-producto="[[ x.nombre ]]"  ng-click="datosEliminar(x,$index)"><i class="fa fa-trash"></i></a>
+                        <a id="[[ x.id ]]" style="font-size:22px; color:#f0ad4e;" ng-click="detalleInventario(x)"><i class="fa fa-edit"></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -56,4 +55,46 @@
             boundary-links="true" >
         </dir-pagination-controls>
     </div>
+
+
+    <div class="modal fade" id="editar_inventario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title" id="myModalLabel">Editar</h4>
+          </div>
+          <form ng-submit="editInventario()">
+          <div class="modal-body">
+            <div class="row">
+                <div class="col-md-5">
+                    <label>Upc</label>
+                    <input type="text" id="upc" class="form-control" ng-model="upc" disabled="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7">
+                    <label>Nombre</label>
+                    <input type="text" id="nombre" class="form-control" ng-model="nombre" disabled="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Cantidad</label>
+                    <input class="form-control" id="id_cantidad" name="cantidad" ng-model="cantidad" ng-required="true" required="required" step="any" type="number" value="0">
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="divider"></div>
+               <p>
+                <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-success btn-simple">Guardar</button>
+             </p> 
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
 </div>

@@ -101,6 +101,7 @@ class InventarioViewSet(viewsets.ModelViewSet):
         if(request.data['update'] == True):
             updated_instance.cantidad = float(updated_instance.cantidad) + float(request.data['cantidad'])
         else:
-             updated_instance.cantidad = updated_instance.cantidad
+            updated_instance.cantidad = request.data['cantidad']
+            print(request.data['cantidad'])
         updated_instance.save()
         return Response({'producto':updated_instance.producto.nombre})

@@ -11,7 +11,7 @@
             <p class="category">Aquí se muestran todos los productos</p>
         </div><br />
         <p style="padding-left:10px;" class="text-left">
-            <button class="btn btn-success" data-toggle="modal" data-target="#agregar_producto">Nuevo</button>
+            <button class="btn btn-success" ng-click="modalNuevo()">Nuevo</button>
         </p>
         <div class="content table-responsive table-full-width">
             <form class="form-inline">
@@ -217,9 +217,12 @@
     
 
 {% block js %}
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/u/bs/dt-1.10.12/datatables.min.css"/>
-<script type="text/javascript" src="https://cdn.datatables.net/u/bs/dt-1.10.12/datatables.min.js"></script>
 <script type="text/javascript">
-    //$('#example').dataTable();
+    $('#agregar_producto').on('hidden', function(){
+        $(this).data('modal', null);
+    });
+    $('#editar_producto').on('hidden', function(){
+        $(this).data('modal', null);
+    });
 </script>
 {% endblock js %}
