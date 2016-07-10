@@ -1,7 +1,11 @@
 from django.conf.urls import url, include
 from .views import (
+<<<<<<< HEAD
 	IndexView,ProductoView,RedirectView,ProveedoresView,
 	InventarioView
+=======
+	IndexView,ProductoView,RedirectView,ProveedoresView,CategoriasView,UnidadesView,VentaView
+>>>>>>> eric/pruebas
 	)
 
 urlpatterns = [
@@ -9,5 +13,11 @@ urlpatterns = [
    url(r'^administrador/$', IndexView.as_view(), name='index'),
    url(r'^administrador/productos/$', ProductoView.as_view(), name='productos'),
    url(r'^administrador/proveedores/$', ProveedoresView.as_view(), name='proveedores'),
+<<<<<<< HEAD
    url(r'^administrador/inventario/$', InventarioView.as_view(), name='inventario'),
+=======
+   url(r'^administrador/categorias/$', CategoriasView.as_view(), name='categorias'),
+   url(r'^administrador/unidades/$', UnidadesView.as_view(), name='unidades'),
+   url(r'^administrador/venta/$', VentaView.as_view(), name='venta'),
+>>>>>>> eric/pruebas
 ]

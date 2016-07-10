@@ -14,6 +14,7 @@ $scope.EditarProveedor=function(proveedor){
 
 $scope.Agregaproveedor=function(){
      $('#Modalproveedor').modal('show');
+
 }
 
 obtenerLista();
@@ -34,7 +35,7 @@ SalesApp.controller('EditproveedoresController', function($scope, $http,$rootSco
            $('#Modalproveedor').modal('show');
            $scope.btnEditar=true;
            $scope.btnGuardar=false;
-           //$scope.content="<h1>Editar proveedor abc</h1>"
+           $scope.content="<h4 class='modal-title'>editar</h4>";
            $scope.proveedor=data.nombre;
            $scope.id=data.id;
            $scope.telefono=data.telefono;
@@ -53,11 +54,12 @@ $scope.Editproveedor=function(){
   $http.put('/api/proveedores/'+Proveedor.id+'/',JSON.stringify(Proveedor)).success(function(data) {
     $('#Modalproveedor').modal('hide');
     obtenerLista();
-    $.notify({icon: 'ti-thumb-up',message: "El proveedor se ha editado correctamente"},{ type: 'success',timer: 4000});
-       });
+    
+         });
 }
 
 $scope.Addproveedor=function(){
+  $scope.content="<h4 class='modal-title'>agregar </h4>";
   Proveedor={};
   Proveedor.nombre=$scope.proveedor;
   Proveedor.telefono=$scope.telefono;
@@ -67,7 +69,7 @@ $scope.Addproveedor=function(){
   $http.post('/api/proveedores/',Proveedor).success(function(data) {
     $('#Modalproveedor').modal('hide');
     obtenerLista();
-    $.notify({icon: 'ti-thumb-up',message: "El proveedor se ha agregado correctamente"},{ type: 'success',timer: 4000});
+   
        });
 
 }

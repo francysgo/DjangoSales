@@ -115,3 +115,21 @@ class DescripcionVenta(models.Model):
 
 	def __str__(self):
 		pass
+
+
+# class Configuracion(models.Model):
+# 	nombre
+# 	valor
+# 	
+     
+
+
+	
+
+# 	class Meta:
+# 		verbose_name = "Configuracion"
+# 		verbose_name_plural = "Configuraciones"
+
+# 	def __str__(self):
+# 		return '%s'%self.usuario
+# 		

@@ -9,6 +9,18 @@ class UnidadSerializer(serializers.HyperlinkedModelSerializer):
         model = CatalogoUnidades
         fields = ('id','nombre')
 
+class UnidadViewSet(viewsets.ModelViewSet):
+    queryset = CatalogoUnidades.objects.all()
+    serializer_class = UnidadSerializer
+
+
+
+
+
+
+
+
+
 class CategoriaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = CatalogoCategoria

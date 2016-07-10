@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block titulo %}Unidades{% endblock titulo %}
+{% block entradas %}class="active"{% endblock entradas %}
+{% block contenido %}
+
+<div class="container-fluid" ng-controller="UnidadesController">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                  <div class="col-md-5">
+                    <h4 class="title">Unidades de medida</h4>
+                    <p class="category">Lista de unidades</p>
+                  </div>
+                      <div class="col-md-5">
+
+                      </div>
+
+                </div>
+
+                    <div class="content table-responsive table-full-width">
+                        <form class="form-inline">
+                            <div class="form-group" style="padding-left:10px;">
+                                <label >Busqueda</label>
+                                <input type="text" ng-model="search" class="form-control border-input" placeholder="buscar..">
+                            </div>
+                            <button type="button"  class="btn btn-success btn-fill btn-wd"  ng-click="AgregaUnidad()"><i class="ti-plus"></i> Agregar nuevo</button>
+                        </form>
+
+                        <table class="table table-striped" id="example">
+                            <thead>
+                                <th ng-click="sort('upc')">Id
+                                    <span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+                                <th ng-click="sort('proveedor')">Nombre
+                                    <span class="glyphicon sort-icon" ng-show="sortKey=='proveedor'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                </th>
+
+                                <th class="text-center">ACCIONES</th>
+                            </tr></thead>
+                            <tbody>
+                                <tr dir-paginate="x in unidades|orderBy:sortKey:reverse|filter:search|itemsPerPage:10">
+                                    <td>[[ x.id ]]</td>
+                                    <td>[[ x.nombre ]]</td>
+
+                                    <td class="text-center">
+                                        <a href="#fakelink" style="font-size:22px; color:#f0ad4e;" ng-click=Editaunidad(x)><i class="fa fa-edit"></i></a>
+                                        <a  style="font-size:22px; color:#d9534f; padding-left:10px;"  ng-click="Eliminarunidad(x)"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <dir-pagination-controls
+                            max-size="5"
+                            direction-links="true"
+                            boundary-links="true" >
+                        </dir-pagination-controls>
+                    </div>
+
+          </div>
+        </div>
+        </div>
+
+
+        <div class="modal fade" id="Modalunidad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+          <div class="modal-dialog">
+            <div class="modal-content" >
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                 <div ng-bind-html="content">
+
+                  </div>
+
+              </div>
+              <div class="modal-body">
+              <div class="form-group">
+                <label>Nombre unidad</label>
+        <input type="hidden" class="form-control border-input" placeholder="nombre" ng-model="id">
+        <input type="text" class="form-control" placeholder="nombre" ng-model="unidad">
+              </div>
+              </div>
+              <div class="modal-footer">
+                <div class="divider"></div>
+                <form>
+                   <p>
+
+                    <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-info btn-fill btn-wd"  ng-click="Addunidad()"><i class="ti-check"></i> Guardar</button>
+                    <button type="submit" class="btn btn-info btn-fill btn-wd" ng-click="Editunidad()">Editar</button>
+                </p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+             <div class="modal fade" id="Modalunidaddelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content" >
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                 <div ng-bind-html="content">
+
+                  </div>
+              </div>
+              <div class="modal-body">
+              <div class="form-group">
+              ¿Estas seguro de eliminar?
+                <label><div ng-bind-html="cat"></div></label>
+        <input type="hidden" class="form-control border-input" placeholder="nombre" ng-model="id">       
+              </div>
+              </div>
+              <div class="modal-footer">
+                <div class="divider"></div>
+                <form>
+                   <p>
+
+                    <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger btn-fill btn-wd"  ng-click="Deleteunidad()"><i class="ti-check"></i> Eliminar</button>
+                   
+                </p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+          </div>
+
+
+
+
+{% endblock contenido %}
+{% block modales %}
+
+
+{% endblock modales %}
+{% block js %}
+{% endblock js %}

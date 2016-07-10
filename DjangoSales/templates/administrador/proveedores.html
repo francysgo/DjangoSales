@@ -52,7 +52,7 @@
                                     <td>[[ x.correo ]]</td>
 
                                     <td class="text-center">
-                                        <a href="#fakelink" style="font-size:22px; color:#f0ad4e;" ng-click=EditarProveedor(x)><i class="fa fa-edit"></i></a>
+                                        <a href="#fakelink" style="font-size:22px; color:#f0ad4e;" ng-click=Editarcategoria(x)><i class="fa fa-edit"></i></a>
                                         <a data-id="[[ x.id ]]" style="font-size:22px; color:#d9534f; padding-left:10px;" data-producto="[[ x.nombre ]]"  ng-click="datosEliminar(x,$index)"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
@@ -80,7 +80,10 @@
     <div class="modal-content" ng-controller="EditproveedoresController">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title"  ng-bind-html="content"></h4>
+        <div ng-bind-html="content">
+
+        </div>
+     
       </div>
       <div class="modal-body">
       <div class="form-group">
