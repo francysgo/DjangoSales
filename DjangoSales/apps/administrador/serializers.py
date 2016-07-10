@@ -13,14 +13,6 @@ class UnidadViewSet(viewsets.ModelViewSet):
     queryset = CatalogoUnidades.objects.all()
     serializer_class = UnidadSerializer
 
-
-
-
-
-
-
-
-
 class CategoriaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = CatalogoCategoria

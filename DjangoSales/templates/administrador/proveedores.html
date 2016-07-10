@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block titulo %}Proveedores{% endblock titulo %}
-{% block entradas %}class="active"{% endblock entradas %}
+{% block catalogos %}open active{% endblock catalogos %}
+{% block proveedores %}style="color:green;"{% endblock proveedores %}
 {% block contenido %}
 
 <div class="container-fluid" ng-controller="proveedoresController">

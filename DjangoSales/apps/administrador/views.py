@@ -35,6 +35,13 @@ class IndexView(TemplateView):
         context = super(IndexView, self).get_context_data(**kwargs)
         return context
 
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.tipo == 'Administrador':
+            return super(IndexView, self).dispatch(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect('/ventas/')
+
 
 class ProductoView(TemplateView):
 
@@ -45,28 +52,39 @@ class ProductoView(TemplateView):
         context['form'] = ProductoForm()
         return context
 
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.tipo == 'Administrador':
+            return super(ProductoView, self).dispatch(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect('/ventas/')
+
 class ProveedoresView(TemplateView):
-	template_name = "proveedores.html"
+    template_name = "proveedores.html"
 
-	def get_context_data(self, **kwargs):
-		context = super(ProveedoresView, self).get_context_data(**kwargs)
-		context['proveedores'] = Proveedor.objects.all()
-		context.update(proveedor_form=ProveedorForm())
-		return context
+    def get_context_data(self, **kwargs):
+        context = super(ProveedoresView, self).get_context_data(**kwargs)
+        context['proveedores'] = Proveedor.objects.all()
+        context.update(proveedor_form=ProveedorForm())
+        return context
 
-<<<<<<< HEAD
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.tipo == 'Administrador':
+            return super(ProveedoresView, self).dispatch(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect('/ventas/')
+
 class InventarioView(TemplateView):
     
     template_name = "inventario.html"
-=======
-class ProdcutosApiView(APIView):
 
-    serializer_class = ProductoSerializer
-
-    def get(self, request, id=None, format=None):
-        productos = Producto.objects.all()
-        response = self.serializer_class(productos, many=True)
-        return Response(response.data)
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.tipo == 'Administrador':
+            return super(InventarioView, self).dispatch(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect('/ventas/')
 
 
 class CategoriasView(TemplateView):
@@ -78,6 +96,13 @@ class CategoriasView(TemplateView):
         #context.update(categoria_form=CategoriaForm())
         return context
 
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.tipo == 'Administrador':
+            return super(CategoriasView, self).dispatch(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect('/ventas/')
+
 class UnidadesView(TemplateView):
     template_name="unidades.html"
 
@@ -86,11 +111,9 @@ class UnidadesView(TemplateView):
         context['unidades']=CatalogoUnidades.objects.all()
         return context
 
-class VentaView(TemplateView):
-    template_name="venta.html"
-
-    def get_context_data(self,**kwargs):
-        context=super(VentaView,self).get_context_data(**kwargs)
-        return context
-
->>>>>>> eric/pruebas
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.tipo == 'Administrador':
+            return super(UnidadesView, self).dispatch(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect('/ventas/')

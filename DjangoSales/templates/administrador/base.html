@@ -34,48 +34,21 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
     <div class="template-page-wrapper">
       <div class="navbar-collapse collapse templatemo-sidebar">
         <ul class="templatemo-sidebar-menu">
-<<<<<<< HEAD
-          <li {% block dashboard %}{% endblock dashboard %}><a href="#"><i class="fa fa-home"></i>Dashboard</a></li>
+          <li {% block dashboard %}{% endblock dashboard %}><a href="{% url 'index' %}"><i class="fa fa-home"></i>Inicio</a></li>
           <li {% block productos %}{% endblock productos %}><a href="{% url 'productos' %}"><i class="fa fa-cubes"></i>Productos</a></li>
           <li {% block inventario %}{% endblock inventario %}><a href="{% url 'inventario' %}"><i class="fa fa-list-alt" aria-hidden="true"></i>Inventario</a></li>
-=======
-          <li>
-            <form class="navbar-form">
-              <input type="text" class="form-control" id="templatemo_search_box" placeholder="Search...">
-              <span class="btn btn-default">buscar</span>
-            </form>
-          </li>
-          <li {% block dashboard %}{% endblock dashboard %}><a href="#"><i class="fa fa-home"></i>Inicio</a></li>
-          <li {% block productos %}{% endblock productos %}><a href="{% url 'productos' %}"><i class="fa fa-cubes"></i>Inventario</a></li>
->>>>>>> eric/pruebas
-          <li class="sub">
+          <li><a href="#" {% block ventas %}{% endblock ventas %}><i class="fa fa-money" aria-hidden="true"></i>Ventas</a></li>
+          <li class="sub {% block catalogos %}{% endblock catalogos %}">
             <a href="javascript:;">
               <i class="fa fa-database"></i> Catálogos <div class="pull-right"><span class="caret"></span></div>
             </a>
             <ul class="templatemo-submenu">
-<<<<<<< HEAD
-              <li><a href="#">Proveedores</a></li>
-              <li><a href="#">Unidades</a></li>
-              <li><a href="#">Categorias</a></li>             
+              <li><a href="{% url 'proveedores' %}" {% block proveedores %}{% endblock proveedores %}>Proveedores</a></li>
+              <li><a href="{% url 'unidades' %}" {% block unidades %}{% endblock unidades %}>Unidades</a></li>
             </ul>
           </li>
-          <li><a href="maps.html"><i class="fa fa-map-marker"></i><span class="badge pull-right">42</span>Maps</a></li>
-          <li><a href="tables.html"><i class="fa fa-users"></i><span class="badge pull-right">NEW</span>Manage Users</a></li>
-          <li><a href="preferences.html"><i class="fa fa-cog"></i>Preferences</a></li>
+          <li><a href="maps.html"><i class="fa fa-list-alt" aria-hidden="true"></i>Reportes</a></li>
           <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i>Salir</a></li>
-=======
-              <li><a href="#">Productos</a></li>
-              <li><a href="#">Proveedores</a></li>
-              <li><a href="#">Unidades</a></li>             
-              <li><a href="#">Categorias</a></li>
-              
-            </ul>
-          </li>
-          <li><a href="maps.html"><i class="fa fa-map-marker"></i><span class="badge pull-right">42</span>Venta</a></li>
-          <li><a href="tables.html"><i class="fa fa-users"></i>Reportes</a></li>
-          <li><a href="preferences.html"><i class="fa fa-cog"></i>Configuración</a></li>
-          <li><a href="javascript:;" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
->>>>>>> eric/pruebas
         </ul>
       </div><!--/.navbar-collapse -->
 
@@ -92,7 +65,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 
       <footer class="templatemo-footer">
         <div class="templatemo-copyright">
-          <p>Copyright &copy; 2084 Your Company Name</p>
+          <p>Copyright &copy; 2016 <a href="http://wiigglelasbs.com" target="_blank">WiggleLabs</a></p>
         </div>
       </footer>
     </div>
@@ -101,25 +74,6 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
     <script src="{% static "js/bootstrap.min.js" %}"></script>
     <script src="{% static "js/templatemo_script.js" %}"></script>
     <script type="text/javascript" src="{% static "js/dirPagination.js" %}"></script>
-<<<<<<< HEAD
-
-    <!--  Checkbox, Radio & Switch Plugins -->
-    <script src="{% static "js/bootstrap-checkbox-radio.js" %}"></script>
-
-    <!--  Charts Plugin -->
-    <script src="{% static "js/chartist.min.js" %}"></script>
-
-    <!--  Notifications Plugin    -->
-    <script src="{% static "js/bootstrap-notify.js" %}"></script>
-
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
-
-    <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
-    <script src="{% static "js/paper-dashboard.js" %}"></script>
-
-    <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-    <script src="{% static "js/demo.js" %}"></script>
 
 
 <script type='text/javascript' src='http://code.angularjs.org/1.0.3/angular-sanitize.js'></script>
