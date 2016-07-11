@@ -4,7 +4,8 @@ from .models import(
 	Producto,
 	Inventario,
 	CatalogoCategoria,
-	CatalogoUnidades
+	CatalogoUnidades,
+	Entradas
 	)
 
 admin.site.register(Proveedor)
@@ -12,3 +13,4 @@ admin.site.register(Producto)
 admin.site.register(Inventario)
 admin.site.register(CatalogoCategoria)
 admin.site.register(CatalogoUnidades)
+admin.site.register(Entradas)

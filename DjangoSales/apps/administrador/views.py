@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from .forms import ProveedorForm, ProductoForm
+from .forms import ProveedorForm, ProductoForm, EntradasForm
 from .serializers import ProductoSerializer
 from rest_framework.views import APIView
 from .models import(
@@ -115,5 +115,20 @@ class UnidadesView(TemplateView):
     def dispatch(self, request, *args, **kwargs):
         if request.user.tipo == 'Administrador':
             return super(UnidadesView, self).dispatch(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect('/ventas/')
+
+class EntradasView(TemplateView):
+    template_name="entradas.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(EntradasView, self).get_context_data(**kwargs)
+        context['form'] = EntradasForm()
+        return context
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.tipo == 'Administrador':
+            return super(EntradasView, self).dispatch(request, *args, **kwargs)
         else:
             return HttpResponseRedirect('/ventas/')

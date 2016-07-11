@@ -1,5 +1,8 @@
 from django import forms
-from .models import Proveedor, Producto
+from .models import (
+    Proveedor, Producto
+    ,Entradas
+    )
 from django.utils import six
 from djng.forms import NgModelFormMixin, NgModelForm,NgDeclarativeFieldsMetaclass, NgFormValidationMixin
 
@@ -19,14 +22,23 @@ class ProveedorForm(NgFormValidationMixin ,  NgModelForm):
                 visible.field.widget.attrs['class'] = 'form-control'
 
 class ProductoForm(NgFormValidationMixin ,  NgModelForm):
-
     def __init__(self, *args, **kwargs):
         super(ProductoForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['required'] = ' '
             field.widget.attrs['class'] = 'form-control border-input'
 
-
     class Meta:
         model = Producto
         fields = ('upc', 'proveedor','nombre','categoria', 'unidad','precio_entrada', 'precio_salida')
+
+class EntradasForm(NgFormValidationMixin ,  NgModelForm):
+    def __init__(self, *args, **kwargs):
+        super(EntradasForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['required'] = ' '
+            field.widget.attrs['class'] = 'form-control border-input'
+
+    class Meta:
+        model = Entradas
+        fields = ('upc', 'proveedor','nombre','categoria', 'unidad','precio_entrada', 'precio_salida', 'cantidad', 'fecha')

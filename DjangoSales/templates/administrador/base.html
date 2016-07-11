@@ -38,6 +38,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
           <li {% block productos %}{% endblock productos %}><a href="{% url 'productos' %}"><i class="fa fa-cubes"></i>Productos</a></li>
           <li {% block inventario %}{% endblock inventario %}><a href="{% url 'inventario' %}"><i class="fa fa-list-alt" aria-hidden="true"></i>Inventario</a></li>
           <li><a href="#" {% block ventas %}{% endblock ventas %}><i class="fa fa-money" aria-hidden="true"></i>Ventas</a></li>
+          <li><a href="{% url 'entradas' %}" {% block entradas %}{% endblock entradas %}><i class="fa fa-car" aria-hidden="true"></i></i>Entradas</a></li>
           <li class="sub {% block catalogos %}{% endblock catalogos %}">
             <a href="javascript:;">
               <i class="fa fa-database"></i> Catálogos <div class="pull-right"><span class="caret"></span></div>
@@ -86,7 +87,8 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
     <script src="{% static "js/app.js"%}"></script>
     <script src="{% static "js/loading-bar.js"%}"></script>
     <script src="{% static "js/sweetalert.min.js"%}"></script>
-    <script src="{% static "js/Controllers/Administrador/Entradas/productosController.js"%}"></script>
+    <script src="{% static "js/Controllers/Administrador/Entradas/entradasController.js"%}"></script>
+    <script src="{% static "js/Controllers/Administrador/Productos/productosController.js"%}"></script>
     <script src="{% static "js/Controllers/Administrador/Proveedores/ProveedoresController.js"%}"></script>
     <script src="{% static "js/Controllers/Administrador/Categorias/CategoriasController.js"%}"></script>
      <script src="{% static "js/Controllers/Administrador/Unidades/UnidadesController.js"%}"></script>

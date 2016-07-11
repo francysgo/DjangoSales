@@ -4,7 +4,11 @@ from apps.users import urls as users_urls
 from apps.home import urls as home_urls
 from apps.administrador import urls as admin_urls
 from rest_framework import routers
-from apps.administrador.serializers import ProductoViewSet, ProveedorViewSet, CategoriarViewSet, InventarioViewSet,UnidadViewSet
+from apps.administrador.serializers import (
+	ProductoViewSet, ProveedorViewSet,
+	CategoriarViewSet, InventarioViewSet,
+	UnidadViewSet, EntradasViewSet
+	)
 
 
 # Routers provide an easy way of automatically determining the URL conf.
@@ -14,6 +18,7 @@ router.register(r'proveedores', ProveedorViewSet)
 router.register(r'categorias', CategoriarViewSet)
 router.register(r'inventario', InventarioViewSet)
 router.register(r'unidades', UnidadViewSet)
+router.register(r'entradas', EntradasViewSet)
 
 
 

@@ -74,17 +74,22 @@ class Inventario(models.Model):
 
 class Entradas(models.Model):
 
-	producto = models.ForeignKey(Producto)
-	cantidad = models.FloatField(default=0)
+	upc = models.BigIntegerField(null=True,blank=True, unique=True)
+	nombre = models.CharField(max_length=50, null=True, blank=True)
+	proveedor = models.ForeignKey(Proveedor, null=True, blank=True)
+	categoria = models.ForeignKey(CatalogoCategoria, null=True, blank=True)
+	unidad = models.ForeignKey(CatalogoUnidades, null=True, blank=True)
 	precio_entrada = models.FloatField(default=0)
 	precio_salida = models.FloatField(default=0)
+	cantidad = models.FloatField(default=0)
+	fecha = models.DateField(default=date.today, null=True)
 
 	class Meta:
 		verbose_name='Entrada'
 		verbose_name_plural = 'Entradas'
 
 	def __str__(self):
-		return self.producto
+		return self.nombre
 
 class Venta(models.Model):
 
@@ -116,20 +121,3 @@ class DescripcionVenta(models.Model):
 	def __str__(self):
 		pass
 
-
-# class Configuracion(models.Model):
-# 	nombre
-# 	valor
-# 	
-     
-
-
-	
-
-# 	class Meta:
-# 		verbose_name = "Configuracion"
-# 		verbose_name_plural = "Configuraciones"
-
-# 	def __str__(self):
-# 		return '%s'%self.usuario
-# 		
