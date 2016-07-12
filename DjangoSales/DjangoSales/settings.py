@@ -54,10 +54,8 @@ TEMPLATES = [
 
             os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'templates/administrador'),
-            os.path.join(BASE_DIR, 'templates/home'),
             os.path.join(BASE_DIR, 'templates/users'),
-            os.path.join(BASE_DIR, 'templates/administrador'),
-            os.path.join(BASE_DIR, 'templates/home')
+            os.path.join(BASE_DIR, 'templates/ventas')
             ],
 
         'APP_DIRS': True,

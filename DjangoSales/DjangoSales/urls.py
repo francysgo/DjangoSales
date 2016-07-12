@@ -25,7 +25,7 @@ router.register(r'entradas', EntradasViewSet)
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(users_urls)),
-    url(r'^venta/', include(home_urls)),
+    url(r'^', include(home_urls)),
     url(r'^', include(admin_urls)),
     url(r'^api/', include(router.urls)),
 

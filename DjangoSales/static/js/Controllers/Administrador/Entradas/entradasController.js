@@ -31,15 +31,15 @@ SalesApp.controller('entradasController', function($scope, $http, productoServic
   	}
 
   	$scope.eliminarProducto = function(){
-  		url = '/api/productos/' + productoService.id_eliminar;
+  		url = '/api/entradas/' + productoService.id_eliminar;
 
   		$http.delete(url)
 	    .success(function(data) {
 	    		$('#eliminar_producto').modal('hide');
-	            swal({   title: "Producto Eliminado!",   text: "El producto ha sido eliminado correctamente!",   type: "success",  confirmButtonColor: "#449d44",   confirmButtonText: "Aceptar!"}, function(){   location.reload(); });
+	            swal({   title: "Entrada Eliminada!",   text: "La entrada ha sido eliminado correctamente!",   type: "success",  confirmButtonColor: "#449d44",   confirmButtonText: "Aceptar!"}, function(){   location.reload(); });
 	    })
 	    .error(function(data) {
-	             sweetAlert("Error...", "Error al eliminar el producto!", "error");
+	             sweetAlert("Error...", "Error al eliminar la entrada!", "error");
 	    });
   	}
 
@@ -62,7 +62,9 @@ SalesApp.controller('entradasController', function($scope, $http, productoServic
 		$scope.precio_entrada = item.precio_entrada;
 		$scope.precio_salida = item.precio_salida;
 		$scope.cantidad = item.cantidad;
-		$scope.fecha = $filter('date')(new Date(item.fecha),'yyyy-MM-dd');
+		$scope.fecha = {
+			value: new Date(item.fecha)
+		}
 		$('#editar_producto').modal('show');
 	}
 	$scope.editProducto = function(){
@@ -76,7 +78,7 @@ SalesApp.controller('entradasController', function($scope, $http, productoServic
 		data.precio_entrada = parseFloat($scope.precio_entrada);
 		data.precio_salida = parseFloat($scope.precio_salida);
 		data.cantidad = $scope.cantidad;
-		data.fecha = $filter('date')(new Date($scope.fecha),'yyyy-MM-dd');
+		data.fecha = $('#fecha').val();
 		var url = '/api/entradas/'+data.id+'/';
 		$http.put(url,data).success(function(data){
 			$('#editar_producto').modal('hide');

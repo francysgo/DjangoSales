@@ -3,8 +3,6 @@ from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .forms import ProveedorForm, ProductoForm, EntradasForm
-from .serializers import ProductoSerializer
-from rest_framework.views import APIView
 from .models import(
 	Proveedor,
 	Producto,
@@ -25,7 +23,7 @@ class RedirectView(TemplateView):
         if request.user.tipo == 'Administrador':
             return HttpResponseRedirect('/administrador/')
         else:
-            return HttpResponseRedirect('/ventas/')
+            return HttpResponseRedirect('/venta/')
 
 class IndexView(TemplateView):
 
@@ -40,7 +38,7 @@ class IndexView(TemplateView):
         if request.user.tipo == 'Administrador':
             return super(IndexView, self).dispatch(request, *args, **kwargs)
         else:
-            return HttpResponseRedirect('/ventas/')
+            return HttpResponseRedirect('/venta/')
 
 
 class ProductoView(TemplateView):
@@ -57,7 +55,7 @@ class ProductoView(TemplateView):
         if request.user.tipo == 'Administrador':
             return super(ProductoView, self).dispatch(request, *args, **kwargs)
         else:
-            return HttpResponseRedirect('/ventas/')
+            return HttpResponseRedirect('/venta/')
 
 class ProveedoresView(TemplateView):
     template_name = "proveedores.html"
@@ -73,7 +71,7 @@ class ProveedoresView(TemplateView):
         if request.user.tipo == 'Administrador':
             return super(ProveedoresView, self).dispatch(request, *args, **kwargs)
         else:
-            return HttpResponseRedirect('/ventas/')
+            return HttpResponseRedirect('/venta/')
 
 class InventarioView(TemplateView):
     
@@ -84,7 +82,7 @@ class InventarioView(TemplateView):
         if request.user.tipo == 'Administrador':
             return super(InventarioView, self).dispatch(request, *args, **kwargs)
         else:
-            return HttpResponseRedirect('/ventas/')
+            return HttpResponseRedirect('/venta/')
 
 
 class CategoriasView(TemplateView):
@@ -101,7 +99,7 @@ class CategoriasView(TemplateView):
         if request.user.tipo == 'Administrador':
             return super(CategoriasView, self).dispatch(request, *args, **kwargs)
         else:
-            return HttpResponseRedirect('/ventas/')
+            return HttpResponseRedirect('/venta/')
 
 class UnidadesView(TemplateView):
     template_name="unidades.html"
@@ -116,7 +114,7 @@ class UnidadesView(TemplateView):
         if request.user.tipo == 'Administrador':
             return super(UnidadesView, self).dispatch(request, *args, **kwargs)
         else:
-            return HttpResponseRedirect('/ventas/')
+            return HttpResponseRedirect('/venta/')
 
 class EntradasView(TemplateView):
     template_name="entradas.html"
@@ -131,4 +129,4 @@ class EntradasView(TemplateView):
         if request.user.tipo == 'Administrador':
             return super(EntradasView, self).dispatch(request, *args, **kwargs)
         else:
-            return HttpResponseRedirect('/ventas/')
+            return HttpResponseRedirect('/venta/')
